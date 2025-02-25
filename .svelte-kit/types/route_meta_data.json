@@ -1,0 +1,17 @@
+{
+	"/": [
+		"src/routes/+page.server.ts"
+	],
+	"/about": [],
+	"/members": [],
+	"/stocks": [],
+	"/stocks/[ticker]": [
+		"src/routes/stocks/[ticker]/+page.server.ts"
+	],
+	"/trades": [
+		"src/routes/trades/+page.server.ts"
+	],
+	"/trades/[id]": [
+		"src/routes/trades/[id]/+page.server.ts"
+	]
+}
