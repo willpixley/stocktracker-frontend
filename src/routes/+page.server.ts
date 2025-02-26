@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-dotenv.config();
+//dotenv.config();
 
 export async function load({ params }: { params: any }) {
 	const BASE_URL = process.env.BACKEND_BASE_URL;
