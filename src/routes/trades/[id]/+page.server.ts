@@ -6,9 +6,10 @@ export async function load({ params }: { params: any }) {
 	const API_KEY = process.env.FINNHUB_KEY;
 	const CONGRESS_KEY = process.env.CONGRESS_API_KEY;
 	const searchParams = { trade_id: params.id };
+	const BASE_URL = process.env.BACKEND_BASE_URL;
 
 	try {
-		const trade = await axios.get(`http://127.0.0.1:8000/trades`, {
+		const trade = await axios.get(`${BASE_URL}/trades`, {
 			params: searchParams
 		});
 		const profileSearchParams = {
