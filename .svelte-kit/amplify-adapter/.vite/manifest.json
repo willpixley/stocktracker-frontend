@@ -1,0 +1,195 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "name": "internal",
+    "src": ".svelte-kit/generated/server/internal.js",
+    "isEntry": true,
+    "imports": [
+      "_internal.js"
+    ]
+  },
+  "_StockProfile.js": {
+    "file": "chunks/StockProfile.js",
+    "name": "StockProfile",
+    "imports": [
+      "_attributes.js",
+      "_escaping.js",
+      "_index.js",
+      "_lib.js"
+    ]
+  },
+  "_TradeList.js": {
+    "file": "chunks/TradeList.js",
+    "name": "TradeList",
+    "imports": [
+      "_index.js",
+      "_lib.js",
+      "_attributes.js",
+      "_escaping.js"
+    ]
+  },
+  "_attributes.js": {
+    "file": "chunks/attributes.js",
+    "name": "attributes",
+    "imports": [
+      "_escaping.js"
+    ]
+  },
+  "_equality.js": {
+    "file": "chunks/equality.js",
+    "name": "equality"
+  },
+  "_escaping.js": {
+    "file": "chunks/escaping.js",
+    "name": "escaping"
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js",
+    "name": "exports",
+    "imports": [
+      "_equality.js"
+    ]
+  },
+  "_index.js": {
+    "file": "chunks/index.js",
+    "name": "index"
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "name": "internal",
+    "imports": [
+      "_equality.js",
+      "_index.js"
+    ]
+  },
+  "_lib.js": {
+    "file": "chunks/lib.js",
+    "name": "lib"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "name": "entries/fallbacks/error.svelte",
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_escaping.js",
+      "_index.js",
+      "_equality.js",
+      "_exports.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "name": "index",
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js",
+    "isEntry": true,
+    "imports": [
+      "_internal.js",
+      "_exports.js"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "name": "entries/pages/_layout.svelte",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "css": [
+      "_app/immutable/assets/_layout.D9clb2Kd.css"
+    ]
+  },
+  "src/routes/+page.server.ts": {
+    "file": "entries/pages/_page.server.ts.js",
+    "name": "entries/pages/_page.server.ts",
+    "src": "src/routes/+page.server.ts",
+    "isEntry": true
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "name": "entries/pages/_page.svelte",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_TradeList.js"
+    ]
+  },
+  "src/routes/about/+page.svelte": {
+    "file": "entries/pages/about/_page.svelte.js",
+    "name": "entries/pages/about/_page.svelte",
+    "src": "src/routes/about/+page.svelte",
+    "isEntry": true
+  },
+  "src/routes/members/+page.svelte": {
+    "file": "entries/pages/members/_page.svelte.js",
+    "name": "entries/pages/members/_page.svelte",
+    "src": "src/routes/members/+page.svelte",
+    "isEntry": true
+  },
+  "src/routes/stocks/+page.svelte": {
+    "file": "entries/pages/stocks/_page.svelte.js",
+    "name": "entries/pages/stocks/_page.svelte",
+    "src": "src/routes/stocks/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_attributes.js",
+      "_escaping.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.Bk1z7yEv.css"
+    ]
+  },
+  "src/routes/stocks/[ticker]/+page.server.ts": {
+    "file": "entries/pages/stocks/_ticker_/_page.server.ts.js",
+    "name": "entries/pages/stocks/_ticker_/_page.server.ts",
+    "src": "src/routes/stocks/[ticker]/+page.server.ts",
+    "isEntry": true
+  },
+  "src/routes/stocks/[ticker]/+page.svelte": {
+    "file": "entries/pages/stocks/_ticker_/_page.svelte.js",
+    "name": "entries/pages/stocks/_ticker_/_page.svelte",
+    "src": "src/routes/stocks/[ticker]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_StockProfile.js",
+      "_attributes.js",
+      "_escaping.js"
+    ]
+  },
+  "src/routes/trades/+page.server.ts": {
+    "file": "entries/pages/trades/_page.server.ts.js",
+    "name": "entries/pages/trades/_page.server.ts",
+    "src": "src/routes/trades/+page.server.ts",
+    "isEntry": true
+  },
+  "src/routes/trades/+page.svelte": {
+    "file": "entries/pages/trades/_page.svelte.js",
+    "name": "entries/pages/trades/_page.svelte",
+    "src": "src/routes/trades/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_TradeList.js"
+    ]
+  },
+  "src/routes/trades/[id]/+page.server.ts": {
+    "file": "entries/pages/trades/_id_/_page.server.ts.js",
+    "name": "entries/pages/trades/_id_/_page.server.ts",
+    "src": "src/routes/trades/[id]/+page.server.ts",
+    "isEntry": true
+  },
+  "src/routes/trades/[id]/+page.svelte": {
+    "file": "entries/pages/trades/_id_/_page.svelte.js",
+    "name": "entries/pages/trades/_id_/_page.svelte",
+    "src": "src/routes/trades/[id]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_StockProfile.js",
+      "_lib.js",
+      "_attributes.js",
+      "_escaping.js"
+    ]
+  }
+}
