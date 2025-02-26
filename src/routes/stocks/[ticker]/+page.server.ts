@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function load({ params }: { params: any }) {
-	const API_KEY = process.env.FINNHUB_KEY;
+	const API_KEY = 'cunbfn1r01qqo190vd50cunbfn1r01qqo190vd5g';
 	const threeMonthsAgo = new Date();
 	threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
 	const today = new Date();

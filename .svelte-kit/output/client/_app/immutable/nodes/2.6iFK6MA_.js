@@ -1,1 +1,18 @@
-import{t as o,a as i}from"../chunks/OqE_2Snn.js";import"../chunks/0PGRgBmW.js";import{p,a as m,s as d,c as l,r as n}from"../chunks/Ynks4hVH.js";import{i as f}from"../chunks/-M0MwnEV.js";import{p as c}from"../chunks/CC-f6snc.js";import{T as v}from"../chunks/RTtC9ka2.js";var x=o('<div class="flex flex-col justify-center w-full  bg-gray-100"><h1 class="text-3xl font-bold mt-8 mb-20 text-center">Recent Trades</h1> <!></div>');function w(e,t){p(t,!1);const r=c(t,"data",8)().trades;f();var a=x(),s=d(l(a),2);v(s,{trades:r}),n(a),i(e,a),m()}export{w as component};
+import { t as o, a as i } from '../chunks/OqE_2Snn.js';
+import '../chunks/0PGRgBmW.js';
+import { p, a as m, s as d, c as l, r as n } from '../chunks/Ynks4hVH.js';
+import { i as f } from '../chunks/-M0MwnEV.js';
+import { p as c } from '../chunks/CC-f6snc.js';
+import { T as v } from '../chunks/RTtC9ka2.js';
+var x = o(
+	'<div class="flex flex-col justify-center w-full  bg-gray-100"><h1 class="text-3xl font-bold mt-8 mb-20 text-center">Recent Trades</h1> <!></div>'
+);
+function w(e, t) {
+	p(t, !1);
+	const r = c(t, 'data', 8)().trades;
+	f();
+	var a = x(),
+		s = d(l(a), 2);
+	v(s, { trades: r }), n(a), i(e, a), m();
+}
+export { w as component };

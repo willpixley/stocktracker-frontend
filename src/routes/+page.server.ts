@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function load({ params }: { params: any }) {
-	const BASE_URL = process.env.BACKEND_BASE_URL;
+	const BASE_URL = 'https://api.congressstockwatch.com';
 
 	try {
 		const trades = await axios.get(`${BASE_URL}/trades?nocache=${new Date().getTime()}`);

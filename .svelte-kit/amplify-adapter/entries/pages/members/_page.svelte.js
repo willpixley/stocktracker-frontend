@@ -1,11 +1,9 @@
-import "clsx";
+import 'clsx';
 function _page($$payload) {
-  {
-    $$payload.out += "<!--[-->";
-    $$payload.out += `<p></p>`;
-  }
-  $$payload.out += `<!--]-->`;
+	{
+		$$payload.out += '<!--[-->';
+		$$payload.out += `<p></p>`;
+	}
+	$$payload.out += `<!--]-->`;
 }
-export {
-  _page as default
-};
+export { _page as default };

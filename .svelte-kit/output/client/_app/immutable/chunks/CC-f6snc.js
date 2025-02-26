@@ -1,1 +1,88 @@
-import{a3 as q,a7 as B,n as M,_ as N,a8 as U,a6 as x,a9 as y,o as l,Y as L,aa as C,V as D,ab as G,ac as V,ad as $,a2 as w,D as z,ae as Z,af as j}from"./Ynks4hVH.js";import{p}from"./CRolmvzv.js";let c=!1;function F(a){var r=c;try{return c=!1,[a(),c]}finally{c=r}}function K(a,r,_,v){var O;var g=(_&j)!==0,d=!x||(_&y)!==0,o=(_&C)!==0,T=(_&Z)!==0,E=!1,i;o?[i,E]=F(()=>a[r]):i=a[r];var Y=N in a||U in a,s=o&&(((O=q(a,r))==null?void 0:O.set)??(Y&&r in a&&(e=>a[r]=e)))||void 0,n=v,P=!0,S=!1,R=()=>(S=!0,P&&(P=!1,T?n=D(v):n=v),n);i===void 0&&v!==void 0&&(s&&d&&G(),i=R(),s&&s(i));var u;if(d)u=()=>{var e=a[r];return e===void 0?R():(P=!0,S=!1,e)};else{var A=(g?L:M)(()=>a[r]);A.f|=B,u=()=>{var e=l(A);return e!==void 0&&(n=void 0),e===void 0?n:e}}if(!(_&V))return u;if(s){var h=a.$$legacy;return function(e,t){return arguments.length>0?((!d||!t||h||E)&&s(t?u():e),e):u()}}var I=!1,b=z(i),f=L(()=>{var e=u(),t=l(b);return I?(I=!1,t):b.v=e});return g||(f.equals=$),function(e,t){if(arguments.length>0){const m=t?l(f):d&&o?p(e):e;return f.equals(m)||(I=!0,w(b,m),S&&n!==void 0&&(n=m),D(()=>l(f))),e}return l(f)}}export{K as p};
+import {
+	a3 as q,
+	a7 as B,
+	n as M,
+	_ as N,
+	a8 as U,
+	a6 as x,
+	a9 as y,
+	o as l,
+	Y as L,
+	aa as C,
+	V as D,
+	ab as G,
+	ac as V,
+	ad as $,
+	a2 as w,
+	D as z,
+	ae as Z,
+	af as j
+} from './Ynks4hVH.js';
+import { p } from './CRolmvzv.js';
+let c = !1;
+function F(a) {
+	var r = c;
+	try {
+		return (c = !1), [a(), c];
+	} finally {
+		c = r;
+	}
+}
+function K(a, r, _, v) {
+	var O;
+	var g = (_ & j) !== 0,
+		d = !x || (_ & y) !== 0,
+		o = (_ & C) !== 0,
+		T = (_ & Z) !== 0,
+		E = !1,
+		i;
+	o ? ([i, E] = F(() => a[r])) : (i = a[r]);
+	var Y = N in a || U in a,
+		s =
+			(o && (((O = q(a, r)) == null ? void 0 : O.set) ?? (Y && r in a && ((e) => (a[r] = e))))) ||
+			void 0,
+		n = v,
+		P = !0,
+		S = !1,
+		R = () => ((S = !0), P && ((P = !1), T ? (n = D(v)) : (n = v)), n);
+	i === void 0 && v !== void 0 && (s && d && G(), (i = R()), s && s(i));
+	var u;
+	if (d)
+		u = () => {
+			var e = a[r];
+			return e === void 0 ? R() : ((P = !0), (S = !1), e);
+		};
+	else {
+		var A = (g ? L : M)(() => a[r]);
+		(A.f |= B),
+			(u = () => {
+				var e = l(A);
+				return e !== void 0 && (n = void 0), e === void 0 ? n : e;
+			});
+	}
+	if (!(_ & V)) return u;
+	if (s) {
+		var h = a.$$legacy;
+		return function (e, t) {
+			return arguments.length > 0 ? ((!d || !t || h || E) && s(t ? u() : e), e) : u();
+		};
+	}
+	var I = !1,
+		b = z(i),
+		f = L(() => {
+			var e = u(),
+				t = l(b);
+			return I ? ((I = !1), t) : (b.v = e);
+		});
+	return (
+		g || (f.equals = $),
+		function (e, t) {
+			if (arguments.length > 0) {
+				const m = t ? l(f) : d && o ? p(e) : e;
+				return f.equals(m) || ((I = !0), w(b, m), S && n !== void 0 && (n = m), D(() => l(f))), e;
+			}
+			return l(f);
+		}
+	);
+}
+export { K as p };

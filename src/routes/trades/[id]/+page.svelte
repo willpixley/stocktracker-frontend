@@ -1,65 +1,65 @@
-<script lang='ts'>
-  import StockProfile from "../../../components/StockProfile.svelte";
-  import {formatDate} from '../../../utils/lib'
-    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
-    
-    
+<script lang="ts">
+	import StockProfile from '../../../components/StockProfile.svelte';
+	import { formatDate } from '../../../utils/lib';
+	let regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
-    export let data : any;
-    const {trade, stock, member} = data
-    
+	export let data: any;
+	const { trade, stock, member } = data;
 </script>
-<div class="bg-gray-100 flex  w-full h-full p-6 justify-evenly pt-[5%]">
-    <div class="w-[30%] h-fit">
-      <StockProfile company={stock}/>
-    </div>
 
+<div class="flex h-full w-full justify-evenly bg-gray-100 p-6 pt-[5%]">
+	<div class="h-fit w-[30%]">
+		<StockProfile company={stock} />
+	</div>
 
-  <div class="bg-white shadow-lg rounded-2xl p-6 flex w-[60%] h-fit items-center">
-    <div class="p-5 border-2 rounded-md border-gray-100 h-full mr-5 w-fit">
-        <div class="relative w-32 h-32 overflow-hidden rounded-full ">
-        <img src="{member.depiction.imageUrl}" alt="{member.directOrderName}" class="object-top object-cover w-full h-full">
-        </div>
-        <p class="text-xl font-bold text-center">{member.directOrderName}</p>
-        <p class="text-md font-semibold text-gray-500 text-center">{trade.member.party} | {member.state}</p>
-    </div>
-    <div class="w-full h-full mr-10 p-5 border-2 rounded-md border-gray-100 flex justify-between">
-        <div>
-            <p class="font-bold text-center">Ticker</p>
-            <p class="text-center">{trade.stock.ticker}</p>
-        </div>
-        <div>
-            <p class="font-bold text-center">Sector</p>
-            <p class="text-center">{trade.sector.sector_name}</p>
-        </div>
-        <div>
-            <p class="font-bold text-center ">Type</p>
-            <p class="text-center">{trade.type == 'B' ? 'Buy' : 'Sell'}</p>
-        </div>
-        
-        <div>
-            <p class="font-bold text-center">Amount</p>
-            <p class="text-center">${trade.amount.toLocaleString()}</p>
-        </div>
-        <div>
-            <p class="font-bold text-center">Bought At</p>
-            <p class="text-center">${trade.price_at_trade.toLocaleString()}</p>
-        </div>
-        <div>
-            <p class="font-bold text-center">Current Price</p>
-            <p class="text-center">${trade.current_price.toLocaleString()}</p>
-        </div>
-        <div>
-            <p class="font-bold text-center">Date</p>
-            <p class="text-center">{formatDate(trade.date)}</p>
-        </div>
-        <div>
-            <p class="font-bold text-center">Traded By</p>
-            <p class="text-center">{trade.traded_by}</p>
-        </div>
+	<div class="flex h-fit w-[60%] items-center rounded-2xl bg-white p-6 shadow-lg">
+		<div class="mr-5 h-full w-fit rounded-md border-2 border-gray-100 p-5">
+			<div class="relative h-32 w-32 overflow-hidden rounded-full">
+				<img
+					src={member.depiction.imageUrl}
+					alt={member.directOrderName}
+					class="h-full w-full object-cover object-top"
+				/>
+			</div>
+			<p class="text-center text-xl font-bold">{member.directOrderName}</p>
+			<p class="text-md text-center font-semibold text-gray-500">
+				{trade.member.party} | {member.state}
+			</p>
+		</div>
+		<div class="mr-10 flex h-full w-full justify-between rounded-md border-2 border-gray-100 p-5">
+			<div>
+				<p class="text-center font-bold">Ticker</p>
+				<p class="text-center">{trade.stock.ticker}</p>
+			</div>
+			<div>
+				<p class="text-center font-bold">Sector</p>
+				<p class="text-center">{trade.sector.sector_name}</p>
+			</div>
+			<div>
+				<p class="text-center font-bold">Type</p>
+				<p class="text-center">{trade.type == 'B' ? 'Buy' : 'Sell'}</p>
+			</div>
 
-    </div>
-  </div>
+			<div>
+				<p class="text-center font-bold">Amount</p>
+				<p class="text-center">${trade.amount.toLocaleString()}</p>
+			</div>
+			<div>
+				<p class="text-center font-bold">Bought At</p>
+				<p class="text-center">${trade.price_at_trade.toLocaleString()}</p>
+			</div>
+			<div>
+				<p class="text-center font-bold">Current Price</p>
+				<p class="text-center">${trade.current_price.toLocaleString()}</p>
+			</div>
+			<div>
+				<p class="text-center font-bold">Date</p>
+				<p class="text-center">{formatDate(trade.date)}</p>
+			</div>
+			<div>
+				<p class="text-center font-bold">Traded By</p>
+				<p class="text-center">{trade.traded_by}</p>
+			</div>
+		</div>
+	</div>
 </div>
-
-

@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function load({ params }: { params: any }) {
-	const API_KEY = process.env.FINNHUB_KEY;
-	const CONGRESS_KEY = process.env.CONGRESS_API_KEY;
+	const API_KEY = 'cunbfn1r01qqo190vd50cunbfn1r01qqo190vd5g';
+	const CONGRESS_KEY = 'Fi7HCmCMb9tmK780KedcRG0diNx4TT0z6YJxiyzv';
 	const searchParams = { trade_id: params.id };
-	const BASE_URL = process.env.BACKEND_BASE_URL;
+	const BASE_URL = 'https://api.congressstockwatch.com';
 
 	try {
 		const trade = await axios.get(`${BASE_URL}/trades`, {

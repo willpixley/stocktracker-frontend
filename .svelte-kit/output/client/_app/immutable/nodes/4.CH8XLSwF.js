@@ -1,1 +1,19 @@
-import{c as f,a as r,t as i}from"../chunks/OqE_2Snn.js";import{f as n}from"../chunks/Ynks4hVH.js";import{i as s}from"../chunks/DV-sUvXB.js";var c=i("<p></p>");function l(t){var o=f(),p=n(o);{var m=a=>{var e=c();r(a,e)};s(p,a=>{a(m)})}r(t,o)}export{l as component};
+import { c as f, a as r, t as i } from '../chunks/OqE_2Snn.js';
+import { f as n } from '../chunks/Ynks4hVH.js';
+import { i as s } from '../chunks/DV-sUvXB.js';
+var c = i('<p></p>');
+function l(t) {
+	var o = f(),
+		p = n(o);
+	{
+		var m = (a) => {
+			var e = c();
+			r(a, e);
+		};
+		s(p, (a) => {
+			a(m);
+		});
+	}
+	r(t, o);
+}
+export { l as component };
