@@ -3,6 +3,7 @@
 	import TradeList from '../components/TradeList.svelte';
 	export let data: any;
 	const trades = data.trades;
+	console.log(trades);
 </script>
 
 <div class="flex w-full flex-col justify-center bg-gray-100">

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { convertToReadableAmount, formatDate, getPctChange } from '../utils/lib';
 	let { trades } = $props();
+
 	const tableHeading =
 		'col-span-1 text-center font-bold bg-slate-800 text-slate-200 rounded-xl mx-2 py-2';
 </script>
@@ -23,12 +24,12 @@
 					class="col-span-1 text-center text-blue-600 hover:underline">{trade.stock__ticker}</a
 				>
 				<p class="col-span-1 text-center">{trade.member__first_name} {trade.member__last_name}</p>
-				<p class="col-span-1 text-center">{trade.type == 'B' ? 'Buy' : 'Sell'}</p>
+				<p class="col-span-1 text-center">{trade.type == 'b' ? 'Buy' : 'Sell'}</p>
 				<p class="col-span-1 text-center">~${trade.amount.toLocaleString()}</p>
 				<p class="col-span-1 text-center">{formatDate(trade.date)}</p>
 				<p class="col-span-1 text-center">{trade.traded_by}</p>
 				<p
-					class={`col-span-1 rounded-lg text-center ${(getPctChange(trade.price_at_trade, trade.current_price) > 0 && trade.type == 'B') || (getPctChange(trade.price_at_trade, trade.current_price) < 0 && trade.type == 'S') ? 'bg-green-500' : 'bg-red-500'}`}
+					class={`col-span-1 rounded-lg text-center ${(getPctChange(trade.price_at_trade, trade.current_price) > 0 && trade.type == 'b') || (getPctChange(trade.price_at_trade, trade.current_price) < 0 && trade.type == 's') ? 'bg-green-500' : 'bg-red-500'}`}
 				>
 					{getPctChange(trade.price_at_trade, trade.current_price) > 0 ? '+' : ''}{getPctChange(
 						trade.price_at_trade,
