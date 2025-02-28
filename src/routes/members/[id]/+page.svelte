@@ -42,12 +42,16 @@
 		</div>
 		<div class="mr-5 flex flex-1 flex-col items-center rounded-md border-2 border-gray-100 p-5">
 			<p class="text-center font-bold">Weighted Returns (Flagged only)</p>
-			<p>{Number(history.weighted_flagged_return).toFixed(2)}%</p>
+			<p>
+				{Number(history.weighted_flagged_return) == 0
+					? 'N/A'
+					: `${Number(history.weighted_flagged_return).toFixed(2)}%`}
+			</p>
 		</div>
 	</div>
 
 	<!-- trade display -->
-	{#if trades.length != 0}
+	{#if trades}
 		<div class="flex w-full flex-col items-center bg-inherit text-gray-800">
 			<div class="grid w-full grid-cols-7 pb-20">
 				<p class={tableHeading}>Stock</p>
