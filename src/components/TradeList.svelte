@@ -23,7 +23,11 @@
 					href={`/stocks/${trade.stock__ticker}`}
 					class="col-span-1 text-center text-blue-600 hover:underline">{trade.stock__ticker}</a
 				>
-				<p class="col-span-1 text-center">{trade.member__first_name} {trade.member__last_name}</p>
+				<a
+					href={`/members/${trade.member__bio_guide_id}`}
+					class="col-span-1 text-center text-blue-600 hover:underline"
+					>{trade.member__first_name} {trade.member__last_name}</a
+				>
 				<p class="col-span-1 text-center">{trade.type == 'b' ? 'Buy' : 'Sell'}</p>
 				<p class="col-span-1 text-center">~${trade.amount.toLocaleString()}</p>
 				<p class="col-span-1 text-center">{formatDate(trade.date)}</p>
