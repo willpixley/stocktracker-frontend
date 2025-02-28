@@ -9,11 +9,9 @@
 
 <div class="w-full bg-gray-100 px-8">
 	<div
-		class="my-10 flex h-fit w-full items-center justify-between rounded-2xl bg-white p-6 shadow-lg"
+		class="my-10 flex h-auto w-full items-stretch justify-between rounded-2xl bg-white p-6 shadow-lg"
 	>
-		<div
-			class="mr-5 flex h-full w-full flex-col items-center rounded-md border-2 border-gray-100 p-5"
-		>
+		<div class="mr-5 flex flex-1 flex-col items-center rounded-md border-2 border-gray-100 p-5">
 			<div class="relative h-32 w-32 overflow-hidden rounded-full">
 				<img
 					src={member.depiction.imageUrl}
@@ -26,29 +24,25 @@
 				{member.partyHistory.at(-1).partyAbbreviation} | {member.state}
 			</p>
 		</div>
-		<div
-			class="mr-5 flex h-full w-full flex-col items-center rounded-md border-2 border-gray-100 p-5"
-		>
+		<div class="mr-5 flex flex-1 flex-col items-center rounded-md border-2 border-gray-100 p-5">
 			<p class="text-center font-bold">Total Trade Volume</p>
 			<p>~${history.volume.toLocaleString()}</p>
 		</div>
-		<div
-			class="mr-5 flex h-full w-full flex-col items-center rounded-md border-2 border-gray-100 p-5"
-		>
+		<div class="mr-5 flex flex-1 flex-col items-center rounded-md border-2 border-gray-100 p-5">
 			<p class="text-center font-bold">Purchases</p>
 			<p>{history.purchases}</p>
 		</div>
-		<div
-			class="mr-5 flex h-full w-full flex-col items-center rounded-md border-2 border-gray-100 p-5"
-		>
+		<div class="mr-5 flex flex-1 flex-col items-center rounded-md border-2 border-gray-100 p-5">
 			<p class="text-center font-bold">Sales</p>
 			<p>{history.sales}</p>
 		</div>
-		<div
-			class="mr-5 flex h-full w-full flex-col items-center rounded-md border-2 border-gray-100 p-5"
-		>
+		<div class="mr-5 flex flex-1 flex-col items-center rounded-md border-2 border-gray-100 p-5">
 			<p class="text-center font-bold">Weighted Returns</p>
 			<p>{Number(history.weighted_return).toFixed(2)}%</p>
+		</div>
+		<div class="mr-5 flex flex-1 flex-col items-center rounded-md border-2 border-gray-100 p-5">
+			<p class="text-center font-bold">Weighted Returns (Flagged only)</p>
+			<p>{Number(history.weighted_flagged_return).toFixed(2)}%</p>
 		</div>
 	</div>
 
