@@ -70,7 +70,8 @@
 					>
 						<a
 							href={`/stocks/${trade.stock.ticker}`}
-							class="col-span-1 text-center text-blue-600 hover:underline">{trade.stock.ticker}</a
+							class={`col-span-1 rounded-md text-center text-blue-600 hover:underline ${trade.flagged ? 'mx-2 bg-red-600' : ''}`}
+							>{trade.stock.ticker}</a
 						>
 						<p class="col-span-1 text-center">{trade.type == 'b' ? 'Buy' : 'Sell'}</p>
 						<p class="col-span-1 text-center">~${trade.amount.toLocaleString()}</p>
