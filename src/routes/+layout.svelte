@@ -10,7 +10,6 @@
 		<a href="/">Home</a>
 		<a href="/trades">Trades</a>
 		<a href="/stocks">Stocks</a>
-		<a href="/members">Members</a>
 		<a href="/about">About</a>
 	</nav>
 </div>

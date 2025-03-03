@@ -2,8 +2,8 @@
 	const faqs: { [key: string]: string } = {
 		"What does a trade's perfomance mean?":
 			"The numerical performance of the trade is simply the stock price's change (in percentage) from when the trade was made to today. A trade is classified as good if either: they purchased the stock, then the price went up, or they sold the stock then price went down. The opposite is true when classifying a trade as bad.",
-		'What is a weighted return percentage?': 'An average return percentage ',
-		"Why is this stock's ticker highlight red": "Don't worry about it",
+		'What is a weighted return percentage?': `A weighted return percentage calculates the percent return on a person's trades, taking into account the volume of each trade. This helps filter out the noise created by smaller trades. For example, if someone wanted to lower their unweighted average return percentage, they could simply make several poor, but small trades to lower their average return.`,
+		"Why is this stock's ticker highlighted red": `A highlighted trade means that it's flagged for potential insider trading.`,
 		'What does it mean for a trade to be flagged?':
 			"A trade is flagged for insider trading when the member trades a stock that's in the same sector as the committees they are members of."
 	};
@@ -16,7 +16,7 @@
 	<div class="grid grid-cols-2 gap-3">
 		{#each Object.keys(faqs) as question}
 			<div
-				class="col-span-1 my-3 w-full rounded-md border-2 border-gray-300 bg-white p-3 shadow-md"
+				class="col-span-1 my-3 w-full rounded-lg border-2 border-gray-300 bg-white p-5 shadow-md"
 			>
 				<h2 class="mb-3 text-xl font-bold">{question}</h2>
 				<p>{faqs[question]}</p>
