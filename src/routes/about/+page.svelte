@@ -13,13 +13,13 @@
 	<div class="">
 		<h1 class="w-full text-center text-3xl font-bold">FAQs</h1>
 	</div>
-	<div class="grid grid-cols-2 gap-3">
+	<div class="grid grid-cols-3 gap-3">
 		{#each Object.keys(faqs) as question}
 			<div
 				class="col-span-1 my-3 w-full rounded-md border-2 border-gray-300 bg-white p-3 shadow-md"
 			>
 				<h2 class="mb-3 text-xl font-bold">{question}</h2>
-				<p>{faqs[question]}</p>
+				<p class="indent-4">{faqs[question]}</p>
 			</div>
 		{/each}
 	</div>

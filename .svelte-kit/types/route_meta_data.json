@@ -3,7 +3,9 @@
 		"src/routes/+page.server.ts"
 	],
 	"/about": [],
-	"/members": [],
+	"/members": [
+		"src/routes/members/+page.ts"
+	],
 	"/members/[id]": [
 		"src/routes/members/[id]/+page.server.ts"
 	],
