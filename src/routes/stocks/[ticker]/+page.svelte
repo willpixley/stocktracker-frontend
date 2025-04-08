@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { CompanyInfo, CompanyNews } from '../../../types/types';
 	import StockProfile from '../../../components/StockProfile.svelte';
+	import StockGraph from '../../../components/StockGraph.svelte';
 
 	export let data;
 	const { company, news } = data;
@@ -22,6 +23,8 @@
 
 <div class="grid h-full w-full grid-cols-5 items-center justify-center gap-5 bg-gray-100 p-4">
 	<StockProfile {company} />
+	<StockGraph show={true} />
+
 	{#each news as article}
 		<div class="col-span-1 h-full w-full rounded-2xl bg-white p-4 shadow-lg">
 			<a href={article.url} target="_blank" class="block">
