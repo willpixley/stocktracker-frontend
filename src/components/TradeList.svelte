@@ -26,7 +26,7 @@
 				<a
 					href={`/members/${trade.member__bio_guide_id}`}
 					class="col-span-1 text-center text-blue-600 hover:underline"
-					>{trade.member__first_name} {trade.member__last_name}</a
+					>{trade.member__first_name} {trade.member__last_name} | {trade.member__party}</a
 				>
 				<p class="col-span-1 text-center">{trade.type == 'b' ? 'Buy' : 'Sell'}</p>
 				<p class="col-span-1 text-center">~${trade.amount.toLocaleString()}</p>
