@@ -6,9 +6,7 @@
 	"/market": [
 		"src/routes/market/+page.server.ts"
 	],
-	"/members": [
-		"src/routes/members/+page.ts"
-	],
+	"/members": [],
 	"/members/[id]": [
 		"src/routes/members/[id]/+page.server.ts"
 	],

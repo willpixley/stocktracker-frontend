@@ -1,4 +1,5 @@
 <script lang="ts">
+	import axios from 'axios';
 	interface Member {
 		bio_guide_id: string;
 		first_name: string;
@@ -22,18 +23,51 @@
 	interface Data {
 		members: MemberData[];
 	}
-	export let data: Data;
-	const { members } = data;
-	let loading = true;
+	import { onMount } from 'svelte';
 
-	// Set loading to false when data is available
-	$: if (data) {
-		loading = false;
-	}
+	let loading = false;
+	let data = null;
+	let error = null;
+	let members = null;
+
+	onMount(async () => {
+		loading = true;
+		error = null;
+
+		const controller = new AbortController();
+
+		try {
+			const timeout = setTimeout(() => controller.abort(), 30000); // 30s timeout
+
+			const res = await axios.get('https://api.congressstockwatch.com/members', {
+				signal: controller.signal
+			});
+
+			clearTimeout(timeout);
+
+			data = res.data;
+			members = data.members;
+		} catch (err) {
+			if (axios.isCancel(err)) {
+				error = 'Request was cancelled';
+			} else if (err.name === 'CanceledError') {
+				error = 'Request timed out';
+			} else {
+				error = err.message;
+			}
+		} finally {
+			loading = false;
+		}
+	});
 </script>
 
 {#if loading}
-	<p>Loading</p>
+	<div class="mt-32 flex flex-col items-center justify-center gap-3 text-blue-300">
+		<div
+			class="h-12 w-12 animate-spin rounded-full border-4 border-blue-300 border-t-transparent"
+		></div>
+		<span class="text-sm font-medium">Loading . . .</span>
+	</div>
 {:else}
 	<div class="flex w-full flex-col items-center bg-gray-100">
 		<h1 class="my-8 text-2xl font-bold">Members by Returns</h1>
