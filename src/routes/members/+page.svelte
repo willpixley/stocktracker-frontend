@@ -35,11 +35,11 @@
 		error = null;
 
 		const controller = new AbortController();
-
+		const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 		try {
 			const timeout = setTimeout(() => controller.abort(), 30000); // 30s timeout
 
-			const res = await axios.get('https://api.congressstockwatch.com/members', {
+			const res = await axios.get(`${BASE_URL}/members`, {
 				signal: controller.signal
 			});
 

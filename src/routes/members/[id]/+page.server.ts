@@ -4,7 +4,7 @@ dotenv.config();
 
 export async function load({ params }: { params: any }) {
 	const searchParams = { id: params.id };
-	const BASE_URL = 'https://api.congressstockwatch.com';
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 	const CONGRESS_KEY = 'Fi7HCmCMb9tmK780KedcRG0diNx4TT0z6YJxiyzv';
 
 	try {

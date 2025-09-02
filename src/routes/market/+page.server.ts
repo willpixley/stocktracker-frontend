@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export async function load() {
-	const BASE_URL = 'https://api.congressstockwatch.com';
-
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 	try {
 		const trends = await axios.get(`${BASE_URL}/market/trends`, {});
 		return {
