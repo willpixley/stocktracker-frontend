@@ -24,6 +24,8 @@ jobs:
 
       - name: Build Svelte app
         run: npm run build -- --mode prod
+        env:
+          VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL}}
 
       - name: Deploy to S3
         run: |
