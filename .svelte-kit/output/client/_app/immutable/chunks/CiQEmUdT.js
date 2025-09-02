@@ -1,0 +1,1 @@
+import{D as e}from"./DT5_h6ex.js";function h(s){return s??""}function n(s,c,r){var t=s==null?"":""+s;return t===""?null:t}function o(s,c,r,t,u,i){var l=s.__className;if(e||l!==r){var a=n(r);(!e||a!==s.getAttribute("class"))&&(a==null?s.removeAttribute("class"):s.className=a),s.__className=r}return i}export{h as c,o as s};

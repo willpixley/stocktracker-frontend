@@ -1,5 +1,20 @@
-import 'clsx';
+import { e as ensure_array_like } from "../../../chunks/index.js";
+import { e as escape_html } from "../../../chunks/escaping.js";
 function _page($$payload) {
-	$$payload.out += `<div class="w-full min-h-full bg-gray-100"><div class="pl-5"><h1>Limitations</h1> <p>Although members of congress are required to disclose all financial transactions like purchase and sale of stocks, the reporting may lag and is not always detailed.</p> <p>Here are some types of information we can see:</p> <ul class="list-disc pl-10"><li>Date of trade</li> <li>Stock traded</li> <li>Transaction type</li> <li>Date transaction is reported</li> <li>Approximate transaction value</li></ul> <p>Here are some types of information we don't reliably have:</p> <ul class="list-disc pl-10"><li>Exact transaction value</li> <li>Who traded the asset (i.e., was it the member of congress or a family member)</li> <li>Reason for transaction</li></ul></div></div>`;
+  const faqs = {
+    "What does a trade's perfomance mean?": "The numerical performance of the trade is simply the stock price's change (in percentage) from when the trade was made to today. A trade is classified as good if either: they purchased the stock, then the price went up, or they sold the stock then price went down. The opposite is true when classifying a trade as bad.",
+    "What is a weighted return percentage?": "An average return percentage ",
+    "Why is this stock's ticker highlight red": "Don't worry about it",
+    "What does it mean for a trade to be flagged?": "A trade is flagged for insider trading when the member trades a stock that's in the same sector as the committees they are members of."
+  };
+  const each_array = ensure_array_like(Object.keys(faqs));
+  $$payload.out += `<div class="min-h-full w-full bg-gray-100 p-5"><div><h1 class="w-full text-center text-3xl font-bold">FAQs</h1></div> <div class="grid grid-cols-3 gap-3"><!--[-->`;
+  for (let $$index = 0, $$length = each_array.length; $$index < $$length; $$index++) {
+    let question = each_array[$$index];
+    $$payload.out += `<div class="col-span-1 my-3 w-full rounded-md border-2 border-gray-300 bg-white p-3 shadow-md"><h2 class="mb-3 text-xl font-bold">${escape_html(question)}</h2> <p class="indent-4">${escape_html(faqs[question])}</p></div>`;
+  }
+  $$payload.out += `<!--]--></div></div>`;
 }
-export { _page as default };
+export {
+  _page as default
+};

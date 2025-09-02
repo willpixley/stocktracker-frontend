@@ -1,24 +1,8 @@
-import * as server from '../entries/pages/trades/_page.server.ts.js';
+
 
 export const index = 7;
 let component_cache;
-export const component = async () =>
-	(component_cache ??= (await import('../entries/pages/trades/_page.svelte.js')).default);
-export { server };
-export const server_id = 'src/routes/trades/+page.server.ts';
-export const imports = [
-	'_app/immutable/nodes/7.MDQOIsX9.js',
-	'_app/immutable/chunks/OqE_2Snn.js',
-	'_app/immutable/chunks/Ynks4hVH.js',
-	'_app/immutable/chunks/0PGRgBmW.js',
-	'_app/immutable/chunks/-M0MwnEV.js',
-	'_app/immutable/chunks/CC-f6snc.js',
-	'_app/immutable/chunks/CRolmvzv.js',
-	'_app/immutable/chunks/RTtC9ka2.js',
-	'_app/immutable/chunks/Dt44hy-N.js',
-	'_app/immutable/chunks/CYxyJEWj.js',
-	'_app/immutable/chunks/BeXT4T_v.js',
-	'_app/immutable/chunks/CP9ULRdw.js'
-];
-export const stylesheets = [];
+export const component = async () => component_cache ??= (await import('../entries/pages/stocks/_page.svelte.js')).default;
+export const imports = ["_app/immutable/nodes/7.BSLUUKAL.js","_app/immutable/chunks/Bg9kRutz.js","_app/immutable/chunks/DT5_h6ex.js","_app/immutable/chunks/BE4_gmHA.js","_app/immutable/chunks/DvG1RpL7.js","_app/immutable/chunks/C3QF1EE5.js","_app/immutable/chunks/COJPL8Gv.js","_app/immutable/chunks/ClTzmbyL.js","_app/immutable/chunks/t--hEgTQ.js"];
+export const stylesheets = ["_app/immutable/assets/7.DCqcEvXr.css"];
 export const fonts = [];

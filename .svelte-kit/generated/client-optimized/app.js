@@ -9,33 +9,33 @@ export const nodes = [
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
 	() => import('./nodes/7'),
-	() => import('./nodes/8')
+	() => import('./nodes/8'),
+	() => import('./nodes/9'),
+	() => import('./nodes/10')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
-	'/': [~2],
-	'/about': [3],
-	'/members': [4],
-	'/stocks': [5],
-	'/stocks/[ticker]': [~6],
-	'/trades': [~7],
-	'/trades/[id]': [~8]
-};
+		"/": [~2],
+		"/about": [3],
+		"/market": [~4],
+		"/members": [5],
+		"/members/[id]": [~6],
+		"/stocks": [7],
+		"/stocks/[ticker]": [~8],
+		"/trades": [~9],
+		"/trades/[id]": [~10]
+	};
 
 export const hooks = {
-	handleError: ({ error }) => {
-		console.error(error);
-	},
-
-	reroute: () => {},
+	handleError: (({ error }) => { console.error(error) }),
+	
+	reroute: (() => {}),
 	transport: {}
 };
 
-export const decoders = Object.fromEntries(
-	Object.entries(hooks.transport).map(([k, v]) => [k, v.decode])
-);
+export const decoders = Object.fromEntries(Object.entries(hooks.transport).map(([k, v]) => [k, v.decode]));
 
 export const hash = false;
 
