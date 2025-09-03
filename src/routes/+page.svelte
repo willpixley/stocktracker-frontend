@@ -3,7 +3,8 @@
 	import TradeList from '../components/TradeList.svelte';
 	export let data: any;
 	const trades = data.trades;
-	console.log(trades);
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
+	console.log('Calling base url', BASE_URL);
 </script>
 
 <div class="flex w-full flex-col justify-center bg-gray-100">
