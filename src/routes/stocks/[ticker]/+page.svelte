@@ -1,10 +1,9 @@
 <script lang="ts">
 	import type { CompanyInfo, CompanyNews } from '../../../types/types';
 	import StockProfile from '../../../components/StockProfile.svelte';
-	import StockGraph from '../../../components/StockGraph.svelte';
-
+	import StockChart from '../../../components/StockChart.svelte';
 	export let data;
-	const { company, news } = data;
+	const { company, news, stockHistory } = data;
 	function convertToReadableAmount(number: number) {
 		if (number >= 1_000_000) {
 			return (number / 1_000_000).toFixed(1) + ' T';
@@ -26,7 +25,9 @@
 		<div class="w-[30%]">
 			<StockProfile {company} />
 		</div>
-		<div class="h-full w-[64%] rounded-2xl bg-white p-6 shadow-lg"></div>
+		<div class="h-full w-[64%] rounded-2xl bg-white p-6 shadow-lg">
+			<StockChart dates={stockHistory.dates} prices={stockHistory.prices} />
+		</div>
 	</div>
 	<h1 class="py-5 text-center text-3xl font-extrabold">Recent News</h1>
 	<div class="grid h-full w-full grid-cols-5 items-center justify-center gap-5 p-4">
