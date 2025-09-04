@@ -63,6 +63,7 @@
 	<!-- trade display -->
 	{#if trades}
 		<div class="flex w-full flex-col items-center bg-inherit text-gray-800">
+			<h1 class="mb-5 text-center text-4xl font-bold">All trades</h1>
 			<div class="grid w-full grid-cols-7 pb-20">
 				<p class={tableHeading}>Stock</p>
 				<p class={tableHeading}>Type</p>
