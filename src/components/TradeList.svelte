@@ -21,27 +21,35 @@
 			<div class="col-span-8 my-2 grid grid-cols-8 rounded-md bg-gray-200 py-3 shadow-md">
 				<a
 					href={`/stocks/${trade.stock__ticker}`}
-					class="col-span-1 text-center text-blue-600 hover:underline">{trade.stock__ticker}</a
+					class="col-span-1 flex items-center justify-center text-center text-blue-600 hover:underline"
+					>{trade.stock__ticker}</a
 				>
 				<a
 					href={`/members/${trade.member__bio_guide_id}`}
-					class="col-span-1 text-center text-blue-600 hover:underline"
+					class="col-span-1 flex items-center justify-center text-center text-blue-600 hover:underline"
 					>{trade.member__first_name} {trade.member__last_name} | {trade.member__party}</a
 				>
-				<p class="col-span-1 text-center">{trade.type == 'b' ? 'Buy' : 'Sell'}</p>
-				<p class="col-span-1 text-center">~${trade.amount.toLocaleString()}</p>
-				<p class="col-span-1 text-center">{formatDate(trade.date)}</p>
-				<p class="col-span-1 text-center">{trade.traded_by}</p>
+				<p class="col-span-1 flex items-center justify-center text-center">
+					{trade.type == 'b' ? 'Buy' : 'Sell'}
+				</p>
+				<p class="col-span-1 flex items-center justify-center text-center">
+					~${trade.amount.toLocaleString()}
+				</p>
+				<p class="col-span-1 flex items-center justify-center text-center">
+					{formatDate(trade.date)}
+				</p>
+				<p class="col-span-1 flex items-center justify-center text-center">{trade.traded_by}</p>
 				<p
-					class={`col-span-1 rounded-lg text-center ${(getPctChange(trade.price_at_trade, trade.current_price) > 0 && trade.type == 'b') || (getPctChange(trade.price_at_trade, trade.current_price) < 0 && trade.type == 's') ? 'bg-green-500' : 'bg-red-500'}`}
+					class={`col-span-1 flex items-center justify-center rounded-lg text-center ${(getPctChange(trade.price_at_trade, trade.current_price) > 0 && trade.type == 'b') || (getPctChange(trade.price_at_trade, trade.current_price) < 0 && trade.type == 's') ? 'bg-green-500' : 'bg-red-500'}`}
 				>
 					{getPctChange(trade.price_at_trade, trade.current_price) > 0 ? '+' : ''}{getPctChange(
 						trade.price_at_trade,
 						trade.current_price
 					).toFixed(1)}%
 				</p>
-				<a class="col-span-1 text-center text-blue-600 hover:underline" href={`/trades/${trade.id}`}
-					>More</a
+				<a
+					class="col-span-1 flex items-center justify-center text-center text-blue-600 hover:underline"
+					href={`/trades/${trade.id}`}>More</a
 				>
 			</div>
 		{/each}

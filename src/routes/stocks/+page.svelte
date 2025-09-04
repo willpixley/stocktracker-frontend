@@ -5,6 +5,7 @@
 		name: string;
 		sector: number;
 	}
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 
 	let results = $state<StockResponse[]>([]);
 	let loading = $state(false);
@@ -14,7 +15,7 @@
 		query = query.trim();
 		console.log(query);
 		if (query != '') {
-			const response = await axios.get('https://api.congressstockwatch.com/stock', {
+			const response = await axios.get(`${BASE_URL}/stock`, {
 				params: {
 					search: query
 				}
