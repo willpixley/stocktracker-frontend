@@ -26,7 +26,7 @@ jobs:
         run: npm run build -- --mode prod
         env:
           VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL}}
-          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          FINNHUB_API_KEY: ${{ secrets.VITE_FINNHUB_API_KEY }}
 
       - name: Deploy to S3
         run: |

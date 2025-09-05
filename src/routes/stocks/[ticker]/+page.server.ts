@@ -1,9 +1,10 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 export async function load({ params }: { params: any }) {
-	const FINNHUB_API_KEY = import.meta.env.FINNHUB_API_KEY;
+	const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 	const threeMonthsAgo = new Date();
 	threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);

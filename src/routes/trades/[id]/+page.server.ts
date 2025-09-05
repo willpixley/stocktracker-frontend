@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function load({ params }: { params: any }) {
-	const FINNHUB_API_KEY = import.meta.env.FINNHUB_API_KEY;
+	const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 	const CONGRESS_KEY = 'Fi7HCmCMb9tmK780KedcRG0diNx4TT0z6YJxiyzv';
 	const searchParams = { trade_id: params.id };
 	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
