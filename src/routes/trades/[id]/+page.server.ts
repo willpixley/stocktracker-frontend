@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function load({ params }: { params: any }) {
-	const API_KEY = 'cunbfn1r01qqo190vd50cunbfn1r01qqo190vd5g';
+	const FINNHUB_API_KEY = import.meta.env.FINNHUB_API_KEY;
 	const CONGRESS_KEY = 'Fi7HCmCMb9tmK780KedcRG0diNx4TT0z6YJxiyzv';
 	const searchParams = { trade_id: params.id };
 	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
@@ -12,7 +12,7 @@ export async function load({ params }: { params: any }) {
 			params: searchParams
 		});
 		const profileSearchParams = {
-			token: API_KEY,
+			token: FINNHUB_API_KEY,
 			symbol: trade.data.stock.ticker
 		};
 		const profile = await axios.get(`https://finnhub.io/api/v1/stock/profile2`, {

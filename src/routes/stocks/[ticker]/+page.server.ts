@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function load({ params }: { params: any }) {
-	const API_KEY = 'cunbfn1r01qqo190vd50cunbfn1r01qqo190vd5g';
+	const FINNHUB_API_KEY = import.meta.env.FINNHUB_API_KEY;
 	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 	const threeMonthsAgo = new Date();
 	threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
@@ -11,11 +11,11 @@ export async function load({ params }: { params: any }) {
 	const formattedPast = threeMonthsAgo.toISOString().split('T')[0];
 	const formattedPresent = today.toISOString().split('T')[0];
 	const profileSearchParams = {
-		token: API_KEY,
+		token: FINNHUB_API_KEY,
 		symbol: params.ticker
 	};
 	const newsSearchParams = {
-		token: API_KEY,
+		token: FINNHUB_API_KEY,
 		symbol: params.ticker,
 		from: formattedPast,
 		to: formattedPresent
