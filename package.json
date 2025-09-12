@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"@sveltejs/adapter-node": "^5.3.2",
-		"amplify-adapter": "^0.2.0",
+		"amplify-adapter": "^0.2.2",
 		"axios": "^1.7.9",
 		"d3": "^7.9.0",
 		"d3-array": "^3.2.4",
