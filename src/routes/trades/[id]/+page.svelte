@@ -55,6 +55,9 @@
 			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
 				<p class="text-center font-bold">Current Price</p>
 				<p class="text-center">${trade.current_price.toLocaleString()}</p>
+				<p class="absolute pt-[5%] text-center text-xs italic text-gray-600">
+					{`Updated on ${formatDate(trade.updated_at)}`}
+				</p>
 			</div>
 			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
 				<p class="text-center font-bold">Date</p>
