@@ -8,6 +8,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL}}
+      FINNHUB_API_KEY: ${{ secrets.VITE_FINNHUB_API_KEY }}
 
     steps:
       - name: Checkout code
@@ -23,9 +26,6 @@ jobs:
 
       - name: Build Svelte app
         run: npm run build -- --mode prod
-        env:
-          VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL}}
-          FINNHUB_API_KEY: ${{ secrets.VITE_FINNHUB_API_KEY }}
 
       - name: Deploy to S3
         run: |
