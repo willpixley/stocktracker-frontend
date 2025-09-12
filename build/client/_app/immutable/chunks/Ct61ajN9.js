@@ -1,0 +1,1 @@
+import{j as i}from"./XLCrm3M2.js";function h(s){return s??""}function n(s,c,r){var t=s==null?"":""+s;return t===""?null:t}function o(s,c,r,t,u,l){var a=s.__className;if(i||a!==r||a===void 0){var e=n(r);(!i||e!==s.getAttribute("class"))&&(e==null?s.removeAttribute("class"):s.className=e),s.__className=r}return l}export{h as c,o as s};

@@ -1,7 +1,6 @@
-import { e as escape_html } from "../../chunks/escaping.js";
+import { w as getContext, x as escape_html, v as pop, t as push } from "../../chunks/index.js";
 import "clsx";
-import { g as getContext, c as pop, p as push } from "../../chunks/index.js";
-import { n as noop } from "../../chunks/equality.js";
+import { n as noop } from "../../chunks/utils2.js";
 import "@sveltejs/kit/internal";
 import { w as writable } from "../../chunks/exports.js";
 import "../../chunks/utils.js";
@@ -48,7 +47,7 @@ const page$1 = {
 const page = page$1;
 function Error$1($$payload, $$props) {
   push();
-  $$payload.out += `<h1>${escape_html(page.status)}</h1> <p>${escape_html(page.error?.message)}</p>`;
+  $$payload.out.push(`<h1>${escape_html(page.status)}</h1> <p>${escape_html(page.error?.message)}</p>`);
   pop();
 }
 export {
