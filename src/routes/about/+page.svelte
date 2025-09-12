@@ -4,7 +4,7 @@
 			"The numerical performance of the trade is simply the stock price's change (in percentage) from when the trade was made to today. A trade is classified as good if either: they purchased the stock, then the price went up, or they sold the stock then price went down. The opposite is true when classifying a trade as bad.",
 		'What is a weighted return percentage?': 'An average return percentage ',
 		"Why is this stock's ticker highlight red": "Don't worry about it",
-		'What does it mean for a trade to be flagged?':
+		'What does it mean for a trade to be flagged? ':
 			"A trade is flagged for insider trading when the member trades a stock that's in the same sector as the committees they are members of."
 	};
 </script>
