@@ -1,23 +1,23 @@
 {
 	"/": [
-		"src/routes/+page.server.ts"
+		"src/routes/+page.ts"
 	],
 	"/about": [],
 	"/market": [
-		"src/routes/market/+page.server.ts"
+		"src/routes/market/+page.ts"
 	],
 	"/members": [],
 	"/members/[id]": [
-		"src/routes/members/[id]/+page.server.ts"
+		"src/routes/members/[id]/+page.ts"
 	],
 	"/stocks": [],
 	"/stocks/[ticker]": [
-		"src/routes/stocks/[ticker]/+page.server.ts"
+		"src/routes/stocks/[ticker]/+page.ts"
 	],
 	"/trades": [
-		"src/routes/trades/+page.server.ts"
+		"src/routes/trades/+page.ts"
 	],
 	"/trades/[id]": [
-		"src/routes/trades/[id]/+page.server.ts"
+		"src/routes/trades/[id]/+page.ts"
 	]
 }
