@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -9,13 +9,10 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			pages: 'build', // output folder
-			assets: 'build', // assets folder
-			fallback: 'index.html' // for SPA routing
-		}),
-		paths: {
-			base: '' // adjust if needed
-		}
+			out: 'build',
+			precompress: false,
+			envPrefix: 'VITE_'
+		})
 	}
 };
 
