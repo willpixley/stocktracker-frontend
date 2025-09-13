@@ -36,6 +36,6 @@ jobs:
         run: |
           aws ecs update-service \
             --cluster frontend-cluster \
-            --service stocktracker-frontend-service \
+            --service stocktracker-frontend-deployment \
             --force-new-deployment \
             --region us-east-2
