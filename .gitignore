@@ -133,3 +133,4 @@ dist
 .svelte-kit/
 .env.local
 .env.prod
+build/
