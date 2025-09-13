@@ -7,15 +7,18 @@
 	const { trade, stock, member } = data;
 </script>
 
-<div class="flex h-full w-full justify-evenly bg-gray-100 p-6 pt-[5%]">
-	<div class="h-[70%] w-[30%]">
+<div
+	class="flex min-h-screen flex-col gap-6 bg-gray-100 p-4 md:flex-row md:items-start md:justify-center"
+>
+	<!-- Profile -->
+	<div class="flex w-full justify-center md:w-[30%]">
 		<StockProfile company={stock} />
 	</div>
 
-	<div class="flex h-[70%] w-[60%] items-center rounded-2xl bg-white p-6 shadow-lg">
-		<div
-			class="mr-5 flex h-full w-fit flex-col items-center justify-center gap-[10%] rounded-md border-2 border-gray-100 p-5"
-		>
+	<!-- Member + Trade Info -->
+	<div class="flex w-full flex-col gap-6 rounded-2xl bg-white p-4 shadow-lg md:w-[65%] md:flex-row">
+		<!-- Member Info -->
+		<div class="flex flex-col items-center gap-4 rounded-md border-2 border-gray-100 p-4 md:w-1/3">
 			<div class="relative h-32 w-32 overflow-hidden rounded-full">
 				<img
 					src={member.depiction.imageUrl}
@@ -30,40 +33,43 @@
 				</p>
 			</div>
 		</div>
-		<div class="grid h-full w-full grid-cols-4 grid-rows-2 rounded-md border-2 border-gray-100 p-5">
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+
+		<!-- Trade Info Grid -->
+		<div
+			class="grid w-full grid-cols-1 gap-4 rounded-md border-2 border-gray-100 p-4 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2"
+		>
+			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Ticker</p>
 				<p class="text-center">{trade.stock.ticker}</p>
 			</div>
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Sector</p>
 				<p class="text-center">{trade.sector.sector_name}</p>
 			</div>
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Type</p>
 				<p class="text-center">{trade.type == 'B' ? 'Buy' : 'Sell'}</p>
 			</div>
-
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Amount</p>
 				<p class="text-center">${trade.amount.toLocaleString()}</p>
 			</div>
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Bought At</p>
 				<p class="text-center">${trade.price_at_trade.toLocaleString()}</p>
 			</div>
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+			<div class="relative flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Current Price</p>
 				<p class="text-center">${trade.current_price.toLocaleString()}</p>
-				<p class="absolute pt-[5%] text-center text-xs italic text-gray-600">
+				<p class=" top-0 pt-1 text-center text-xs italic text-gray-600">
 					{`Updated on ${formatDate(trade.updated_at)}`}
 				</p>
 			</div>
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Date</p>
 				<p class="text-center">{formatDate(trade.date)}</p>
 			</div>
-			<div class="col-span-1 row-span-1 flex flex-col items-center justify-center gap-2">
+			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Traded By</p>
 				<p class="text-center">{trade.traded_by}</p>
 			</div>
