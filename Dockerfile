@@ -1,23 +1,34 @@
-# Use latest Node 20
-FROM node:20-alpine
+# --- Build stage ---
+FROM node:20 AS build
 
-# Create app directory
 WORKDIR /app
 
-# Copy package files
+# Copy dependency files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install ALL deps (including dev) to allow Svelte build
+RUN npm ci
 
-# Copy app source
+# Copy the rest of the source
 COPY . .
 
-# Build the app
+# Build the app (adapter-node will generate build/)
 RUN npm run build
 
-# Expose port for Fargate
+# --- Runtime stage ---
+FROM node:20 AS runtime
+
+WORKDIR /app
+
+# Copy only production dependencies
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Copy built app from build stage
+COPY --from=build /app/build ./build
+
+# Expose your app port
 EXPOSE 3000
 
-# Start app
-CMD ["npm", "start"]
+# Run the server (adapter-node output)
+CMD ["node", "build"]
