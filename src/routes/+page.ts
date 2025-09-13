@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export async function load({ params }: { params: any }) {
-	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL ?? 'api.congressstockwatch.com';
 	console.log('Base url', BASE_URL);
 
 	try {
