@@ -35,7 +35,7 @@ jobs:
       - name: Force new ECS deployment
         run: |
           aws ecs update-service \
-            --cluster stocktracker-cluster \
+            --cluster frontend-cluster \
             --service stocktracker-frontend-service \
             --force-new-deployment \
             --region us-east-2
