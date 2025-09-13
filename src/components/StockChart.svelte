@@ -1,14 +1,15 @@
 <script lang="ts">
 	import * as d3 from 'd3';
-	import { onMount, afterUpdate } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	export let dates: string[] = [];
 	export let prices: number[] = [];
 
 	let chartEl: HTMLDivElement;
+	let resizeObserver: ResizeObserver;
 
 	function drawChart() {
-		if (!dates.length || !prices.length) return;
+		if (!dates.length || !prices.length || !chartEl) return;
 
 		// clear previous chart
 		d3.select(chartEl).selectAll('*').remove();
@@ -19,8 +20,10 @@
 		}));
 
 		const margin = { top: 20, right: 30, bottom: 40, left: 60 };
-		const width = chartEl.clientWidth - margin.left - margin.right;
-		const height = chartEl.clientHeight - margin.top - margin.bottom;
+
+		// use offsetWidth/offsetHeight to account for full content box
+		const width = chartEl.offsetWidth - margin.left - margin.right;
+		const height = chartEl.offsetHeight - margin.top - margin.bottom;
 
 		const svg = d3
 			.select(chartEl)
@@ -30,28 +33,25 @@
 			.append('g')
 			.attr('transform', `translate(${margin.left},${margin.top})`);
 
-		// x axis (time scale)
+		// scales
 		const x = d3
 			.scaleTime()
 			.domain(d3.extent(data, (d) => d.x) as [Date, Date])
 			.range([0, width]);
 
-		svg
-			.append('g')
-			.attr('transform', `translate(0,${height})`)
-			.call(d3.axisBottom(x).tickFormat(d3.timeFormat('%b %d') as any));
-
-		// y axis (linear scale)
 		const y = d3
 			.scaleLinear()
 			.domain([d3.min(data, (d) => d.y)! * 0.95, d3.max(data, (d) => d.y)! * 1.05])
 			.nice()
 			.range([height, 0]);
 
-		svg.append('g').call(d3.axisLeft(y));
+		// axes
+		svg
+			.append('g')
+			.attr('transform', `translate(0,${height})`)
+			.call(d3.axisBottom(x).tickFormat(d3.timeFormat('%b %d') as any));
 
-		// bisector
-		const bisect = d3.bisector<{ x: Date; y: number }, Date>((d) => d.x).left;
+		svg.append('g').call(d3.axisLeft(y));
 
 		// line
 		svg
@@ -68,6 +68,9 @@
 					.y((d) => y(d.y))
 			);
 
+		// bisector
+		const bisect = d3.bisector<{ x: Date; y: number }, Date>((d) => d.x).left;
+
 		// focus circle
 		const focus = svg
 			.append('g')
@@ -82,10 +85,10 @@
 			.append('g')
 			.append('text')
 			.style('opacity', 0)
-			.attr('text-anchor', 'left')
+			.attr('text-anchor', 'end')
 			.attr('alignment-baseline', 'middle');
 
-		// overlay rect for capturing mouse
+		// overlay rect for hover
 		svg
 			.append('rect')
 			.style('fill', 'none')
@@ -109,21 +112,29 @@
 
 				focus.attr('cx', x(d.x)).attr('cy', y(d.y));
 
-				// fixed position in top-right corner
 				const padding = 10;
-				const tooltipX = width - padding; // right edge minus padding
-				const tooltipY = padding; // distance from top
+				const tooltipX = width - padding;
+				const tooltipY = padding;
 
 				focusText
-					.html(`${d3.timeFormat('%b %d, %Y')(d.x)} — $${d.y.toFixed(2)}`)
+					.text(`${d3.timeFormat('%b %d, %Y')(d.x)} — $${d.y.toFixed(2)}`)
 					.attr('x', tooltipX)
-					.attr('y', tooltipY)
-					.attr('text-anchor', 'end'); // align text to the right
+					.attr('y', tooltipY);
 			});
 	}
 
-	onMount(drawChart);
-	afterUpdate(drawChart);
+	onMount(() => {
+		drawChart();
+		resizeObserver = new ResizeObserver(() => {
+			drawChart();
+		});
+		resizeObserver.observe(chartEl);
+	});
+
+	onDestroy(() => {
+		if (resizeObserver) resizeObserver.disconnect();
+	});
 </script>
 
-<div bind:this={chartEl} class="h-96 w-full rounded-lg bg-white p-4 shadow"></div>
+<!-- removed p-4 to let chart expand full width -->
+<div bind:this={chartEl} class="h-64 w-full rounded-lg bg-white shadow sm:h-80 md:h-96"></div>
