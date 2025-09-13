@@ -27,6 +27,8 @@ RUN npm ci --omit=dev
 # Copy built app from build stage
 COPY --from=build /app/build ./build
 
+ENV VITE_BACKEND_API_URL=$VITE_BACKEND_API_URL
+
 # Expose your app port
 EXPOSE 3000
 

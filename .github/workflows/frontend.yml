@@ -29,6 +29,8 @@ jobs:
         run: |
           IMAGE_TAG=latest
           docker build -t stocktracker-frontend:$IMAGE_TAG .
+            --build-arg VITE_BACKEND_API_URL=https://api.congressstockwatch.com \
+
           docker tag stocktracker-frontend:$IMAGE_TAG 600627329405.dkr.ecr.us-east-2.amazonaws.com/stocktracker-frontend:$IMAGE_TAG
           docker push 600627329405.dkr.ecr.us-east-2.amazonaws.com/stocktracker-frontend:$IMAGE_TAG
 
