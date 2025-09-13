@@ -1,38 +1,22 @@
 import axios from 'axios';
 
 export async function load({ params }: { params: any }) {
-	const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL ?? 'https://api.congressstockwatch.com';
-	const threeMonthsAgo = new Date();
-	threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-	const today = new Date();
-	const formattedPast = threeMonthsAgo.toISOString().split('T')[0];
-	const formattedPresent = today.toISOString().split('T')[0];
-	const profileSearchParams = {
-		token: FINNHUB_API_KEY,
-		symbol: params.ticker
-	};
-	const newsSearchParams = {
-		token: FINNHUB_API_KEY,
-		symbol: params.ticker,
-		from: formattedPast,
-		to: formattedPresent
-	};
 
-	const stockHistoryParams = {
+	const searchParams = {
 		ticker: params.ticker
 	};
 
 	try {
-		const profile = await axios.get(`https://finnhub.io/api/v1/stock/profile2`, {
-			params: profileSearchParams
+		const profile = await axios.get(`${BASE_URL}/stock/profile`, {
+			params: searchParams
 		});
 
-		const news = await axios.get(`https://finnhub.io/api/v1/company-news`, {
-			params: newsSearchParams
+		const news = await axios.get(`${BASE_URL}/stock/news`, {
+			params: searchParams
 		});
 		const stockData = await axios.get(`${BASE_URL}/stock/history`, {
-			params: stockHistoryParams
+			params: searchParams
 		});
 
 		const mockData = {

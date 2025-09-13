@@ -39,7 +39,7 @@
 				<p class="text-sm text-gray-500">
 					{new Date(article.datetime * 1000).toLocaleDateString()}
 				</p>
-				<p class="mt-2 text-gray-700">{article.summary}</p>
+				<p class="mt-2 line-clamp-4 text-gray-700">{article.summary}</p>
 				<div class="mt-4">
 					<img src={article.image} alt="News" class="h-auto w-full rounded-md" />
 				</div>

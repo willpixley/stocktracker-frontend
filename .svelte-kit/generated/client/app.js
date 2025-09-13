@@ -17,15 +17,15 @@ export const nodes = [
 export const server_loads = [];
 
 export const dictionary = {
-		"/": [2],
+		"/": [~2],
 		"/about": [3],
 		"/market": [4],
 		"/members": [5],
-		"/members/[id]": [6],
+		"/members/[id]": [~6],
 		"/stocks": [7],
-		"/stocks/[ticker]": [8],
-		"/trades": [9],
-		"/trades/[id]": [10]
+		"/stocks/[ticker]": [~8],
+		"/trades": [~9],
+		"/trades/[id]": [~10]
 	};
 
 export const hooks = {
