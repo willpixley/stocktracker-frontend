@@ -26,7 +26,8 @@ RUN npm ci --omit=dev
 
 # Copy built app from build stage
 COPY --from=build /app/build ./build
-
+ARG VITE_BACKEND_API_URL
+# Make it available as an environment variable for SvelteKit
 ENV VITE_BACKEND_API_URL=$VITE_BACKEND_API_URL
 
 # Expose your app port
