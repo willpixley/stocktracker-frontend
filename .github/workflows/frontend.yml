@@ -1,4 +1,4 @@
-name: Frontend CI/CD
+name: SvelteKit CI/CD ECS
 
 on:
   push:
@@ -6,45 +6,36 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    env:
-      VITE_BACKEND_API_URL: ${{ secrets.VITE_BACKEND_API_URL}}
-      FINNHUB_API_KEY: ${{ secrets.VITE_FINNHUB_API_KEY }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          node-version: 20
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build Svelte app
-        run: npm run build -- --mode prod
-
-      - name: Deploy to S3
+      - name: Login to Amazon ECR
         run: |
-          npm install
-          npm run build
-          aws s3 sync build/ s3://$S3_BUCKET --delete
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          aws ecr get-login-password --region us-east-2 \
+          | docker login --username AWS --password-stdin 600627329405.dkr.ecr.us-east-2.amazonaws.com
 
-      - name: Invalidate CloudFront Cache
+      - name: Build and push Docker image
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
-            --paths "/*"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          IMAGE_TAG=latest
+          docker build -t stocktracker-frontend:$IMAGE_TAG .
+          docker tag stocktracker-frontend:$IMAGE_TAG 600627329405.dkr.ecr.us-east-2.amazonaws.com/stocktracker-frontend:$IMAGE_TAG
+          docker push 600627329405.dkr.ecr.us-east-2.amazonaws.com/stocktracker-frontend:$IMAGE_TAG
+
+      - name: Force new ECS deployment
+        run: |
+          aws ecs update-service \
+            --cluster stocktracker-cluster \
+            --service stocktracker-frontend-service \
+            --force-new-deployment \
+            --region us-east-2

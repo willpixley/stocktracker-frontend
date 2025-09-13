@@ -9,10 +9,10 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			// Output folder for the build
 			out: 'build',
 			precompress: false
-		})
+		}),
+		prerender: { entries: [] } // optional: prevent static prerender
 	}
 };
 
