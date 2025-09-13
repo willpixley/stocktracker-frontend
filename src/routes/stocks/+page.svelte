@@ -5,7 +5,7 @@
 		name: string;
 		sector: number;
 	}
-	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL ?? 'https://api.congressstockwatch.com';
 
 	let results = $state<StockResponse[]>([]);
 	let loading = $state(false);

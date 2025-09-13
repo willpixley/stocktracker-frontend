@@ -4,7 +4,7 @@ export async function load({ params }: { params: any }) {
 	const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 	const CONGRESS_KEY = 'Fi7HCmCMb9tmK780KedcRG0diNx4TT0z6YJxiyzv';
 	const searchParams = { trade_id: params.id };
-	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL ?? 'https://api.congressstockwatch.com';
 	try {
 		const trade = await axios.get(`${BASE_URL}/trades`, {
 			params: searchParams

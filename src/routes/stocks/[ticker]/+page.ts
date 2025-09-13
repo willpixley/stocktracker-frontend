@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function load({ params }: { params: any }) {
 	const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
-	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
+	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL ?? 'https://api.congressstockwatch.com';
 	const threeMonthsAgo = new Date();
 	threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
 	const today = new Date();
