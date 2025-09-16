@@ -42,4 +42,12 @@
 		</div>
 	{/if}
 </div>
-{@render children()}
+<main>
+	{@render children()}
+</main>
+
+<style>
+	main {
+		min-height: 100%;
+	}
+</style>

@@ -21,10 +21,15 @@ export async function load({ params }: { params: any }) {
 			{ params: memberSearchParams }
 		);
 
+		const stockData = await axios.get(`${BASE_URL}/stock/history`, {
+			params: profileSearchParams
+		});
+
 		return {
 			member: member.data.member,
 			trade: trade.data,
-			stock: profile.data
+			stock: profile.data,
+			stockHistory: stockData.data.data
 		};
 	} catch (e) {
 		console.log(e);

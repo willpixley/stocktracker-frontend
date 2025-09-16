@@ -1,20 +1,16 @@
 <script lang="ts">
+	import StockChart from '../../../components/StockChart.svelte';
 	import StockProfile from '../../../components/StockProfile.svelte';
 	import { formatDate } from '../../../utils/lib';
 	let regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
 	export let data: any;
-	const { trade, stock, member } = data;
+	const { trade, stock, member, stockHistory } = data;
 </script>
 
 <div
 	class="flex min-h-screen flex-col gap-6 bg-gray-100 p-4 md:flex-row md:items-start md:justify-center"
 >
-	<!-- Profile -->
-	<div class="flex w-full justify-center md:w-[30%]">
-		<StockProfile company={stock} />
-	</div>
-
 	<!-- Member + Trade Info -->
 	<div class="flex w-full flex-col gap-6 rounded-2xl bg-white p-4 shadow-lg md:w-[65%] md:flex-row">
 		<!-- Member Info -->
@@ -74,5 +70,9 @@
 				<p class="text-center">{trade.traded_by}</p>
 			</div>
 		</div>
+	</div>
+	<div class="flex w-full flex-col gap-6 rounded-2xl bg-white p-4 shadow-lg md:w-[65%]">
+		<h1 class="text-center font-bold">Past 6 months</h1>
+		<StockChart dates={stockHistory.dates} prices={stockHistory.prices} tradeDate={trade.date} />
 	</div>
 </div>

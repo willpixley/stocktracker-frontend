@@ -89,7 +89,7 @@
 					>
 						<a
 							href={`/stocks/${trade.stock.ticker}`}
-							class={`col-span-1 text-center text-blue-600 hover:underline ${trade.flagged ? 'mx-2 bg-red-600' : ''}`}
+							class={`col-span-1 text-center text-blue-600 hover:underline ${trade.flagged ? 'mx-2 bg-red-400' : ''}`}
 							>{trade.stock.ticker}</a
 						>
 						<p class="col-span-1 text-center">{trade.type == 'b' ? 'Buy' : 'Sell'}</p>

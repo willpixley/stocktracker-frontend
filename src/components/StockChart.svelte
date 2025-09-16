@@ -4,6 +4,7 @@
 
 	export let dates: string[] = [];
 	export let prices: number[] = [];
+	export let tradeDate: string | null = null; // new prop
 
 	let chartEl: HTMLDivElement;
 	let resizeObserver: ResizeObserver;
@@ -20,8 +21,6 @@
 		}));
 
 		const margin = { top: 20, right: 30, bottom: 40, left: 60 };
-
-		// use offsetWidth/offsetHeight to account for full content box
 		const width = chartEl.offsetWidth - margin.left - margin.right;
 		const height = chartEl.offsetHeight - margin.top - margin.bottom;
 
@@ -53,7 +52,7 @@
 
 		svg.append('g').call(d3.axisLeft(y));
 
-		// line
+		// line path
 		svg
 			.append('path')
 			.datum(data)
@@ -68,7 +67,24 @@
 					.y((d) => y(d.y))
 			);
 
-		// bisector
+		// add vertical trade line if provided
+		if (tradeDate) {
+			const tradeX = new Date(tradeDate);
+			if (!isNaN(tradeX.getTime())) {
+				const lineX = x(tradeX);
+				svg
+					.append('line')
+					.attr('x1', lineX)
+					.attr('x2', lineX)
+					.attr('y1', 0)
+					.attr('y2', height)
+					.attr('stroke', 'red')
+					.attr('stroke-width', 2)
+					.attr('stroke-dasharray', '4 2');
+			}
+		}
+
+		// bisector for hover
 		const bisect = d3.bisector<{ x: Date; y: number }, Date>((d) => d.x).left;
 
 		// focus circle
@@ -113,13 +129,10 @@
 				focus.attr('cx', x(d.x)).attr('cy', y(d.y));
 
 				const padding = 10;
-				const tooltipX = width - padding;
-				const tooltipY = padding;
-
 				focusText
 					.text(`${d3.timeFormat('%b %d, %Y')(d.x)} — $${d.y.toFixed(2)}`)
-					.attr('x', tooltipX)
-					.attr('y', tooltipY);
+					.attr('x', width - padding)
+					.attr('y', padding);
 			});
 	}
 
@@ -136,5 +149,4 @@
 	});
 </script>
 
-<!-- removed p-4 to let chart expand full width -->
 <div bind:this={chartEl} class="h-64 w-full rounded-lg bg-white shadow sm:h-80 md:h-96"></div>
