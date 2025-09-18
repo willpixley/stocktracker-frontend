@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export async function load({ params }: { params: any }) {
 	const BASE_URL = import.meta.env.VITE_BACKEND_API_URL ?? 'https://api.congressstockwatch.com';
-	console.log('Base url', BASE_URL);
 
 	try {
 		const trades = await axios.get(`${BASE_URL}/trades`);
