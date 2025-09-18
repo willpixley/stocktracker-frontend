@@ -2,7 +2,6 @@
 	import { formatDate } from '../../utils/lib';
 	export let data: any;
 	const { trends } = data;
-	console.log(trends);
 </script>
 
 <div class="flex min-h-full w-full flex-col items-center gap-8 bg-gray-300">

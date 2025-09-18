@@ -36,7 +36,9 @@
 		>
 			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Ticker</p>
-				<p class="text-center">{trade.stock.ticker}</p>
+				<a href={`/stocks/${trade.stock.ticker}`} class="text-center text-blue-500 underline"
+					>{trade.stock.ticker}</a
+				>
 			</div>
 			<div class="flex flex-col items-center gap-1">
 				<p class="text-center font-bold">Sector</p>
