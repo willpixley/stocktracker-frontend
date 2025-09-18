@@ -34,11 +34,36 @@
 		<div
 			class="flex flex-col gap-3 border-t border-slate-700 bg-slate-800 px-5 pb-4 text-slate-300 md:hidden"
 		>
-			<a href="/trades">Trades</a>
-			<a href="/stocks">Stocks</a>
-			<a href="/market">Market</a>
-			<a href="/members">Members</a>
-			<a href="/about">About</a>
+			<a
+				href="/trades"
+				onclick={() => {
+					menuOpen = false;
+				}}>Trades</a
+			>
+			<a
+				href="/stocks"
+				onclick={() => {
+					menuOpen = false;
+				}}>Stocks</a
+			>
+			<a
+				href="/market"
+				onclick={() => {
+					menuOpen = false;
+				}}>Market</a
+			>
+			<a
+				href="/members"
+				onclick={() => {
+					menuOpen = false;
+				}}>Members</a
+			>
+			<a
+				href="/about"
+				onclick={() => {
+					menuOpen = false;
+				}}>About</a
+			>
 		</div>
 	{/if}
 </div>
