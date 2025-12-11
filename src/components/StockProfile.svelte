@@ -11,11 +11,17 @@
 	<p class="text-center text-gray-500">{company.ticker} - {company.exchange}</p>
 	<div class="mt-4 space-y-2">
 		<p><strong>Industry:</strong> {company.finnhubIndustry}</p>
-		<p><strong>Market Cap:</strong> {convertToReadableAmount(company.marketCapitalization)}</p>
+		<p>
+			<strong>Market Cap:</strong>
+			{company.marketCapitalization && convertToReadableAmount(company.marketCapitalization)}
+		</p>
 		<p><strong>IPO Date:</strong> {formatDate(company.ipo)}</p>
 		<p><strong>Country:</strong> {company.country}</p>
 		<p><strong>Currency:</strong> {company.currency}</p>
-		<p><strong>Shares Outstanding:</strong> {convertToReadableAmount(company.shareOutstanding)}</p>
+		<p>
+			<strong>Shares Outstanding:</strong>
+			{company.shareOutstanding && convertToReadableAmount(company.shareOutstanding)}
+		</p>
 	</div>
 	<div class="mt-4 text-center">
 		<a href={company.weburl} target="_blank" class="text-blue-500 hover:underline">Visit Website</a>

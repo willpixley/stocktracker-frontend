@@ -27,24 +27,27 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-		RouteId(): "/" | "/about" | "/market" | "/members" | "/members/[id]" | "/stocks" | "/stocks/[ticker]" | "/trades" | "/trades/[id]";
+		RouteId(): "/" | "/about" | "/market" | "/members" | "/members/[id]" | "/segments" | "/segments/[segment_id]" | "/stocks" | "/stocks/[ticker]" | "/trades" | "/trades/[id]";
 		RouteParams(): {
 			"/members/[id]": { id: string };
+			"/segments/[segment_id]": { segment_id: string };
 			"/stocks/[ticker]": { ticker: string };
 			"/trades/[id]": { id: string }
 		};
 		LayoutParams(): {
-			"/": { id?: string; ticker?: string };
+			"/": { id?: string; segment_id?: string; ticker?: string };
 			"/about": Record<string, never>;
 			"/market": Record<string, never>;
 			"/members": { id?: string };
 			"/members/[id]": { id: string };
+			"/segments": { segment_id?: string };
+			"/segments/[segment_id]": { segment_id: string };
 			"/stocks": { ticker?: string };
 			"/stocks/[ticker]": { ticker: string };
 			"/trades": { id?: string };
 			"/trades/[id]": { id: string }
 		};
-		Pathname(): "/" | "/about" | "/about/" | "/market" | "/market/" | "/members" | "/members/" | `/members/${string}` & {} | `/members/${string}/` & {} | "/stocks" | "/stocks/" | `/stocks/${string}` & {} | `/stocks/${string}/` & {} | "/trades" | "/trades/" | `/trades/${string}` & {} | `/trades/${string}/` & {};
+		Pathname(): "/" | "/about" | "/about/" | "/market" | "/market/" | "/members" | "/members/" | `/members/${string}` & {} | `/members/${string}/` & {} | "/segments" | "/segments/" | `/segments/${string}` & {} | `/segments/${string}/` & {} | "/stocks" | "/stocks/" | `/stocks/${string}` & {} | `/stocks/${string}/` & {} | "/trades" | "/trades/" | `/trades/${string}` & {} | `/trades/${string}/` & {};
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/favicon.png" | string & {};
 	}

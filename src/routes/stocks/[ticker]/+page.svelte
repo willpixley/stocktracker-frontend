@@ -4,8 +4,8 @@
 	import StockChart from '../../../components/StockChart.svelte';
 
 	export let data;
-	const { company, news, stockHistory } = data;
-
+	const { company, news, stockHistory, segments } = data;
+	console.log(segments);
 	function convertToReadableAmount(number: number) {
 		if (number >= 1_000_000) {
 			return (number / 1_000_000).toFixed(1) + ' T';
@@ -27,7 +27,7 @@
 		</div>
 		<div class="w-full rounded-2xl bg-white p-6 shadow-lg md:w-[60%]">
 			<h1 class="mb-3 text-center font-bold">6 month performance</h1>
-			<StockChart dates={stockHistory.dates} prices={stockHistory.prices} />
+			<StockChart {segments} dates={stockHistory.dates} prices={stockHistory.prices} />
 		</div>
 	</div>
 

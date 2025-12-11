@@ -1,18 +1,23 @@
 <script lang="ts">
 	import * as d3 from 'd3';
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 
 	export let dates: string[] = [];
 	export let prices: number[] = [];
-	export let tradeDate: string | null = null; // new prop
+	export let tradeDate: string | null = null;
+	export let segments: any[] | null = null;
 
 	let chartEl: HTMLDivElement;
 	let resizeObserver: ResizeObserver;
+	const dispatch = createEventDispatcher();
+
+	// Tooltip for segments
+	let segmentTooltip: HTMLDivElement;
 
 	function drawChart() {
 		if (!dates.length || !prices.length || !chartEl) return;
 
-		// clear previous chart
+		// Clear previous chart
 		d3.select(chartEl).selectAll('*').remove();
 
 		const data = dates.map((d, i) => ({
@@ -32,7 +37,7 @@
 			.append('g')
 			.attr('transform', `translate(${margin.left},${margin.top})`);
 
-		// scales
+		// Scales
 		const x = d3
 			.scaleTime()
 			.domain(d3.extent(data, (d) => d.x) as [Date, Date])
@@ -44,30 +49,66 @@
 			.nice()
 			.range([height, 0]);
 
-		// axes
+		// Axes
 		svg
 			.append('g')
 			.attr('transform', `translate(0,${height})`)
 			.call(d3.axisBottom(x).tickFormat(d3.timeFormat('%b %d') as any));
-
 		svg.append('g').call(d3.axisLeft(y));
 
-		// line path
-		svg
+		// --- Price line ---
+		const lineGenerator = d3
+			.line<{ x: Date; y: number }>()
+			.x((d) => x(d.x))
+			.y((d) => y(d.y));
+
+		const linePath = svg
 			.append('path')
 			.datum(data)
 			.attr('fill', 'none')
 			.attr('stroke', 'steelblue')
-			.attr('stroke-width', 1.5)
-			.attr(
-				'd',
-				d3
-					.line<{ x: Date; y: number }>()
-					.x((d) => x(d.x))
-					.y((d) => y(d.y))
-			);
+			.attr('stroke-width', 2)
+			.attr('d', lineGenerator);
 
-		// add vertical trade line if provided
+		// Tooltip for price line
+		const priceTooltip = d3
+			.select(chartEl.parentElement)
+			.append('div')
+			.style('position', 'absolute')
+			.style('pointer-events', 'none')
+			.style('background', 'white')
+			.style('border', '1px solid #ccc')
+			.style('padding', '4px 8px')
+			.style('font-size', '12px')
+			.style('border-radius', '4px')
+			.style('opacity', 0);
+
+		// Create invisible path for hover detection
+		svg
+			.append('path')
+			.datum(data)
+			.attr('fill', 'none')
+			.attr('stroke', 'transparent')
+			.attr('stroke-width', 8) // easier hover
+			.attr('d', lineGenerator)
+			.on('mouseover', () => priceTooltip.style('opacity', 1))
+			.on('mouseout', () => priceTooltip.style('opacity', 0))
+			.on('mousemove', (event) => {
+				const [mx] = d3.pointer(event);
+				const bisect = d3.bisector<{ x: Date; y: number }, Date>((d) => d.x).left;
+				const x0 = x.invert(mx);
+				const i = bisect(data, x0, 1);
+				const d0 = data[i - 1];
+				const d1 = data[i] || d0;
+				const d = x0.getTime() - d0.x.getTime() > d1.x.getTime() - x0.getTime() ? d1 : d0;
+
+				priceTooltip
+					.style('left', event.pageX + 10 + 'px')
+					.style('top', event.pageY + 10 + 'px')
+					.html(`${d3.timeFormat('%b %d, %Y')(d.x)} — $${d.y.toFixed(2)}`);
+			});
+
+		// --- Vertical trade line ---
 		if (tradeDate) {
 			const tradeX = new Date(tradeDate);
 			if (!isNaN(tradeX.getTime())) {
@@ -84,68 +125,128 @@
 			}
 		}
 
-		// bisector for hover
-		const bisect = d3.bisector<{ x: Date; y: number }, Date>((d) => d.x).left;
+		// --- Assign lanes to segments to avoid overlap ---
+		if (segments && Array.isArray(segments)) {
+			const lanes: Date[] = []; // keep track of last sell in each lane
 
-		// focus circle
-		const focus = svg
-			.append('g')
-			.append('circle')
-			.style('fill', 'none')
-			.attr('stroke', 'black')
-			.attr('r', 5)
-			.style('opacity', 0);
+			segments.forEach((seg) => {
+				const buy = new Date(seg.buy_trade.date);
+				const sell = new Date(seg.sell_trade.date);
+				if (!buy || !sell) {
+					seg._lane = 0;
+					return;
+				}
 
-		// focus text
-		const focusText = svg
-			.append('g')
-			.append('text')
-			.style('opacity', 0)
-			.attr('text-anchor', 'end')
-			.attr('alignment-baseline', 'middle');
-
-		// overlay rect for hover
-		svg
-			.append('rect')
-			.style('fill', 'none')
-			.style('pointer-events', 'all')
-			.attr('width', width)
-			.attr('height', height)
-			.on('mouseover', () => {
-				focus.style('opacity', 1);
-				focusText.style('opacity', 1);
-			})
-			.on('mouseout', () => {
-				focus.style('opacity', 0);
-				focusText.style('opacity', 0);
-			})
-			.on('mousemove', function (event) {
-				const x0 = x.invert(d3.pointer(event, this)[0]);
-				const i = bisect(data, x0, 1);
-				const d0 = data[i - 1];
-				const d1 = data[i] || d0;
-				const d = x0.getTime() - d0.x.getTime() > d1.x.getTime() - x0.getTime() ? d1 : d0;
-
-				focus.attr('cx', x(d.x)).attr('cy', y(d.y));
-
-				const padding = 10;
-				focusText
-					.text(`${d3.timeFormat('%b %d, %Y')(d.x)} — $${d.y.toFixed(2)}`)
-					.attr('x', width - padding)
-					.attr('y', padding);
+				let lane = 0;
+				while (true) {
+					if (!lanes[lane] || buy > lanes[lane]) {
+						// This lane is free
+						seg._lane = lane;
+						lanes[lane] = sell; // update last sell date in this lane
+						break;
+					}
+					lane++;
+				}
 			});
+		}
+
+		// --- Segment tooltip ---
+		if (!segmentTooltip) {
+			segmentTooltip = document.createElement('div');
+			segmentTooltip.style.position = 'absolute';
+			segmentTooltip.style.pointerEvents = 'none';
+			segmentTooltip.style.background = 'white';
+			segmentTooltip.style.border = '1px solid #ccc';
+			segmentTooltip.style.padding = '4px 8px';
+			segmentTooltip.style.fontSize = '12px';
+			segmentTooltip.style.borderRadius = '4px';
+			segmentTooltip.style.opacity = '0';
+			document.body.appendChild(segmentTooltip);
+		}
+
+		// --- Draw segments ---
+		const segmentLayer = svg.append('g').attr('class', 'segments');
+		if (segments && Array.isArray(segments)) {
+			segments.forEach((seg) => {
+				const buy = seg.buy_trade;
+				const sell = seg.sell_trade;
+				if (!buy || !sell) return;
+
+				const x1 = x(new Date(buy.date));
+				const x2 = x(new Date(sell.date));
+				const yLine = height * 0.8 + seg._lane * 16;
+
+				const g = segmentLayer.append('g');
+
+				// Segment line
+				// Segment line
+				g.append('line')
+					.attr('x1', x1)
+					.attr('x2', x2)
+					.attr('y1', yLine)
+					.attr('y2', yLine)
+					.attr('stroke', seg.segment?.flagged ? 'red' : '#444') // <-- change color if flagged
+					.attr('stroke-width', 6)
+					.attr('stroke-linecap', 'round')
+					.style('cursor', 'pointer')
+					.style('pointer-events', 'all')
+					.on('mouseover', (event) => {
+						const buyDate = new Date(seg.buy_trade.date);
+						const sellDate = new Date(seg.sell_trade.date);
+						const memberName = `${seg.member?.first_name ?? ''} ${seg.member?.last_name ?? ''}`;
+						const amount = seg.segment?.amount ?? '';
+						const purchasePrice = seg.buy_trade?.price_at_trade ?? '';
+						const salePrice = seg.sell_trade?.price_at_trade ?? '';
+
+						segmentTooltip.style.opacity = '1';
+						segmentTooltip.innerHTML = `
+                            <strong>Start:</strong> ${d3.timeFormat('%b %d, %Y')(buyDate)}<br/>
+                            <strong>End:</strong> ${d3.timeFormat('%b %d, %Y')(sellDate)}<br/>
+                            <strong>Purchase Price:</strong> $${purchasePrice}<br/>
+                            <strong>Sale Price:</strong> $${salePrice}<br/>
+                            <strong>Member:</strong> ${memberName}<br/>
+                            <strong>Amount:</strong> $${amount.toLocaleString()}
+                        `;
+					})
+					.on('mousemove', (event) => {
+						segmentTooltip.style.left = event.pageX + 10 + 'px';
+						segmentTooltip.style.top = event.pageY + 10 + 'px';
+					})
+					.on('mouseout', () => {
+						segmentTooltip.style.opacity = '0';
+					})
+					.on('click', () => {
+						const segmentId = seg.id;
+						window.location.href = `/segments/${segmentId}`;
+					});
+
+				// End caps
+				g.append('line')
+					.attr('x1', x1)
+					.attr('x2', x1)
+					.attr('y1', yLine - 6)
+					.attr('y2', yLine + 6)
+					.attr('stroke', '#444');
+
+				g.append('line')
+					.attr('x1', x2)
+					.attr('x2', x2)
+					.attr('y1', yLine - 6)
+					.attr('y2', yLine + 6)
+					.attr('stroke', '#444');
+			});
+		}
 	}
 
 	onMount(() => {
 		drawChart();
-		resizeObserver = new ResizeObserver(() => {
-			drawChart();
-		});
+		resizeObserver = new ResizeObserver(() => drawChart());
 		resizeObserver.observe(chartEl);
 	});
 
 	onDestroy(() => {
 		if (resizeObserver) resizeObserver.disconnect();
+		if (segmentTooltip) document.body.removeChild(segmentTooltip);
 	});
 </script>
 

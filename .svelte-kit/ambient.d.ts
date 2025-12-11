@@ -31,6 +31,7 @@ declare module '$env/static/private' {
 	export const ELECTRON_RUN_AS_NODE: string;
 	export const COMMAND_MODE: string;
 	export const DISPLAY: string;
+	export const GEMINI_API_KEY: string;
 	export const HOME: string;
 	export const HOMEBREW_CELLAR: string;
 	export const HOMEBREW_PREFIX: string;
@@ -38,7 +39,6 @@ declare module '$env/static/private' {
 	export const INFOPATH: string;
 	export const LOGNAME: string;
 	export const MallocNanoZone: string;
-	export const OLDPWD: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const PATH: string;
 	export const PWD: string;
@@ -60,6 +60,10 @@ declare module '$env/static/private' {
 	export const _: string;
 	export const __CFBundleIdentifier: string;
 	export const __CF_USER_TEXT_ENCODING: string;
+	export const APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL: string;
+	export const VSCODE_DOTNET_INSTALL_TOOL_ORIGINAL_HOME: string;
+	export const APPLICATIONINSIGHTS_CONFIGURATION_CONTENT: string;
+	export const VSCODE_L10N_BUNDLE_LOCATION: string;
 	export const ELECTRON_NO_ASAR: string;
 	export const NODE_ENV: string;
 }
@@ -96,6 +100,7 @@ declare module '$env/dynamic/private' {
 		ELECTRON_RUN_AS_NODE: string;
 		COMMAND_MODE: string;
 		DISPLAY: string;
+		GEMINI_API_KEY: string;
 		HOME: string;
 		HOMEBREW_CELLAR: string;
 		HOMEBREW_PREFIX: string;
@@ -103,7 +108,6 @@ declare module '$env/dynamic/private' {
 		INFOPATH: string;
 		LOGNAME: string;
 		MallocNanoZone: string;
-		OLDPWD: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		PATH: string;
 		PWD: string;
@@ -125,6 +129,10 @@ declare module '$env/dynamic/private' {
 		_: string;
 		__CFBundleIdentifier: string;
 		__CF_USER_TEXT_ENCODING: string;
+		APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL: string;
+		VSCODE_DOTNET_INSTALL_TOOL_ORIGINAL_HOME: string;
+		APPLICATIONINSIGHTS_CONFIGURATION_CONTENT: string;
+		VSCODE_L10N_BUNDLE_LOCATION: string;
 		ELECTRON_NO_ASAR: string;
 		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;

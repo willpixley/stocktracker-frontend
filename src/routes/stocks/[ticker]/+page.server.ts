@@ -6,7 +6,16 @@ export async function load({ params }: { params: any }) {
 	const searchParams = {
 		ticker: params.ticker
 	};
+	const sixMonthsAgo = new Date();
+	sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
+	const formatted = sixMonthsAgo.toISOString().split('T')[0];
+	const segmentParams = {
+		ticker: params.ticker,
+		from_date: formatted,
+		closed: true
+	};
+	console.log(segmentParams);
 	try {
 		const profile = await axios.get(`${BASE_URL}/stock/profile`, {
 			params: searchParams
@@ -17,6 +26,10 @@ export async function load({ params }: { params: any }) {
 		});
 		const stockData = await axios.get(`${BASE_URL}/stock/history`, {
 			params: searchParams
+		});
+
+		const segmentData = await axios.get(`${BASE_URL}/segments`, {
+			params: segmentParams
 		});
 
 		const mockData = {
@@ -189,7 +202,8 @@ export async function load({ params }: { params: any }) {
 			ticker: params.ticker,
 			company: profile.data,
 			news: news.data.slice(0, 20),
-			stockHistory: stockData.data.data
+			stockHistory: stockData.data.data,
+			segments: segmentData.data.segments
 			// stockHistory: mockData
 		};
 	} catch (e) {
