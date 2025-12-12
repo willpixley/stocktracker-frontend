@@ -1,18 +1,18 @@
-<script lang="ts">
+<script>
 	import * as d3 from 'd3';
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 
-	export let dates: string[] = [];
-	export let prices: number[] = [];
-	export let tradeDate: string | null = null;
-	export let segments: any[] | null = null;
+	export let dates = [];
+	export let prices = [];
+	export let tradeDate = null;
+	export let segments = null;
 
-	let chartEl: HTMLDivElement;
-	let resizeObserver: ResizeObserver;
+	let chartEl;
+	let resizeObserver;
 	const dispatch = createEventDispatcher();
 
 	// Tooltip for segments
-	let segmentTooltip: HTMLDivElement;
+	let segmentTooltip;
 
 	function drawChart() {
 		if (!dates.length || !prices.length || !chartEl) return;
@@ -40,12 +40,12 @@
 		// Scales
 		const x = d3
 			.scaleTime()
-			.domain(d3.extent(data, (d) => d.x) as [Date, Date])
+			.domain(d3.extent(data, (d) => d.x))
 			.range([0, width]);
 
 		const y = d3
 			.scaleLinear()
-			.domain([d3.min(data, (d) => d.y)! * 0.95, d3.max(data, (d) => d.y)! * 1.05])
+			.domain([d3.min(data, (d) => d.y) * 0.95, d3.max(data, (d) => d.y) * 1.05])
 			.nice()
 			.range([height, 0]);
 
@@ -53,12 +53,12 @@
 		svg
 			.append('g')
 			.attr('transform', `translate(0,${height})`)
-			.call(d3.axisBottom(x).tickFormat(d3.timeFormat('%b %d') as any));
+			.call(d3.axisBottom(x).tickFormat(d3.timeFormat('%b %d')));
 		svg.append('g').call(d3.axisLeft(y));
 
 		// --- Price line ---
 		const lineGenerator = d3
-			.line<{ x: Date; y: number }>()
+			.line()
 			.x((d) => x(d.x))
 			.y((d) => y(d.y));
 
@@ -95,7 +95,7 @@
 			.on('mouseout', () => priceTooltip.style('opacity', 0))
 			.on('mousemove', (event) => {
 				const [mx] = d3.pointer(event);
-				const bisect = d3.bisector<{ x: Date; y: number }, Date>((d) => d.x).left;
+				const bisect = d3.bisector((d) => d.x).left;
 				const x0 = x.invert(mx);
 				const i = bisect(data, x0, 1);
 				const d0 = data[i - 1];
@@ -127,7 +127,7 @@
 
 		// --- Assign lanes to segments to avoid overlap ---
 		if (segments && Array.isArray(segments)) {
-			const lanes: Date[] = []; // keep track of last sell in each lane
+			const lanes = []; // keep track of last sell in each lane
 
 			segments.forEach((seg) => {
 				const buy = new Date(seg.buy_trade.date);

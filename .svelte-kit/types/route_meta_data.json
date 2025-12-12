@@ -10,6 +10,9 @@
 	"/members/[id]": [
 		"src/routes/members/[id]/+page.server.ts"
 	],
+	"/segments": [
+		"src/routes/segments/+page.server.js"
+	],
 	"/segments/[segment_id]": [
 		"src/routes/segments/[segment_id]/+page.server.ts"
 	],

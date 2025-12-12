@@ -21,7 +21,7 @@
 
 		<!-- Desktop Nav -->
 		<div class="hidden gap-5 md:flex">
-			<a href="/trades">Trades</a>
+			<a href="/segments">Segments</a>
 			<a href="/stocks">Stocks</a>
 			<a href="/market">Market</a>
 			<a href="/members">Members</a>
@@ -35,10 +35,10 @@
 			class="flex flex-col gap-3 border-t border-slate-700 bg-slate-800 px-5 pb-4 text-slate-300 md:hidden"
 		>
 			<a
-				href="/trades"
+				href="/segments"
 				onclick={() => {
 					menuOpen = false;
-				}}>Trades</a
+				}}>Segments</a
 			>
 			<a
 				href="/stocks"
