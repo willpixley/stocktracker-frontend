@@ -12,10 +12,9 @@ export async function load({ params }: { params: any }) {
 	const formatted = sixMonthsAgo.toISOString().split('T')[0];
 	const segmentParams = {
 		ticker: params.ticker,
-		from_date: formatted,
-		closed: true
+		from_date: formatted
 	};
-	console.log(segmentParams);
+
 	try {
 		const profile = await axios.get(`${BASE_URL}/stock/profile`, {
 			params: searchParams
@@ -197,7 +196,6 @@ export async function load({ params }: { params: any }) {
 				229.72000122070312, 238.47000122070312, 239.77999877929688
 			]
 		};
-
 		return {
 			ticker: params.ticker,
 			company: profile.data,

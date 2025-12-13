@@ -46,7 +46,7 @@
 <div class="flex flex-col gap-6 p-4 md:p-6">
 	<!-- Filters -->
 	<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-		<div class="flex flex-col gap-3 sm:flex-row">
+		<div class="flex min-w-64 flex-col gap-3 sm:flex-row">
 			<Select
 				options={flaggedOptions}
 				bind:value={flagged}
@@ -78,9 +78,15 @@
 	<!-- Segments Grid -->
 	<div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 		{#each segments as segment}
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<div
-				class="flex cursor-pointer flex-col justify-between rounded-xl bg-white p-4 shadow transition hover:shadow-lg"
-				href={`/segments/${segment.id}`}
+				type="button"
+				role="button"
+				tabindex="0"
+				class=" flex cursor-pointer flex-col justify-between rounded-xl bg-white p-4 shadow transition hover:shadow-lg"
+				onclick={() => {
+					goto(`/segments/${segment.id}`);
+				}}
 			>
 				<div class="flex items-start justify-between">
 					<div class="flex flex-col gap-1">
@@ -102,6 +108,13 @@
 							{formatDate(segment.buy_trade.date)} &rarr; {segment.sell_trade
 								? formatDate(segment.sell_trade.date)
 								: 'Current'}
+						</p>
+						<p
+							class={`w-fit rounded-3xl px-2 py-1 text-sm text-gray-100 ${segment.closed ? (Number(segment.buy_trade.price_at_trade) > Number(segment.sell_trade.price_at_trade) ? 'bg-green-500' : 'bg-red-400') : Number(segment.buy_trade.price_at_trade) > Number(segment.buy_trade.current_price) ? 'bg-green-500' : 'bg-red-400'}`}
+						>
+							${Number(segment.buy_trade.price_at_trade).toLocaleString()} &rarr; ${segment.sell_trade
+								? Number(segment.sell_trade.price_at_trade).toLocaleString()
+								: Number(segment.buy_trade.current_price).toLocaleString()}
 						</p>
 					</div>
 					<div class="text-right">

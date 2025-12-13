@@ -15,8 +15,21 @@ export async function load({ params }: { params: any }) {
 		});
 
 		const segment = segmentData.data.segments[0];
-		const from = segment.buy_trade.date;
-		const to = segment.sell_trade.date ?? '';
+		const buyDate = new Date(segment.buy_trade.date);
+		buyDate.setDate(buyDate.getDate() - 7);
+
+		const from = buyDate.toISOString().slice(0, 10);
+		const today = new Date();
+		today.setDate(today.getDate() - 2);
+
+		let to = today.toISOString().slice(0, 10);
+		if (segment.closed) {
+			const sale = new Date(segment.sell_trade.date);
+			sale.setDate(sale.getDate() + 7);
+
+			to = sale.toISOString().slice(0, 10);
+		}
+
 		const ticker = segment.stock.ticker;
 		const newsParams = {
 			ticker: ticker,
